@@ -16,10 +16,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
   },
   projectName: {
-    
-    
-    
-        
+       
   },
 }));
 
@@ -30,7 +27,7 @@ function ProjectCard(props) {
     <Fragment>
       <Grid container item xs>
         <Grid container xs={4}>
-          <Link className="link" to="/project" style={{ textDecoration: 'none' }}>
+          <Link className="link" to={`/project/${projectData.id}`} style={{ textDecoration: 'none' }}>
             <Grid container>
                 
               <img alt="projectData" src={projectData.image} />
