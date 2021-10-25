@@ -35,7 +35,7 @@ function App() {
           <div>
             <Nav className="menu" />
             <Switch>
-              <Route exact path="/project">
+              <Route exact path="/project/:id">
                 <ProjectPage />
               </Route>
               <Route path="/">
