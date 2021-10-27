@@ -1,12 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
-import { 
-  Grid, 
-  Typography, 
-  IconButton, 
-  Button,
- } from "@material-ui/core";
+import { Grid, Typography, IconButton, Button } from "@material-ui/core";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -21,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
   title: {
     color: theme.palette.primary.main,
   },
-  menu: {
-    color: 'theme.palette.primary.main',
+  menuApp: {
+    backgroundColor: theme.palette.primary.main,
   },
   menuItem: {
     padding: theme.spacing(2),
@@ -33,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Nav() {
-  const token = window.localStorage.getItem('token');
+  const token = window.localStorage.getItem("token");
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -44,11 +39,10 @@ function Nav() {
     setAnchorEl(null);
   };
 
-
   return (
     <Grid className={classes.root}>
-      <AppBar style={{ background: '#33ab9f' }} position="static">
-        <Toolbar>
+      <AppBar className={classes.menuApp} position="static">
+        <Toolbar className={classes.menu}>
           <IconButton
             id="basic-button"
             aria-controls="basic-menu"
@@ -74,21 +68,23 @@ function Nav() {
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={() => window.localStorage.clear()}>Logout</MenuItem>
+            <MenuItem onClick={() => window.localStorage.clear()}>
+              Logout
+            </MenuItem>
           </Menu>
           <Grid container className={classes.menu} justifyContent="flex-end">
             <Grid className={classes.menuItem}>
               <Typography variant="h6" sx={{ flexGrow: 1 }}>
                 <Button>
-                <Link
-                 color="inherit"
-                  className={classes.menuText}
-                  style={{ textDecoration: "none" }}
-                  to="/"
-                >
-                  Home
-                </Link>
-                {/* {
+                  <Link
+                    color="inherit"
+                    className={classes.menuText}
+                    style={{ textDecoration: "none" }}
+                    to="/"
+                  >
+                    Home
+                  </Link>
+                  {/* {
                   token 
                   ?
                   <button onClick={() => window.localStorage.getItem}</button>
@@ -102,14 +98,15 @@ function Nav() {
             </Grid>
           </Grid>
           <Button color="inherit">
-          <Link
-          color="inherit"
-           className={classes.menuText}
-           style={{ textDecoration: "none" }}
-           to="/login"
-         >
-         Login
-         </Link></Button>
+            <Link
+              color="inherit"
+              className={classes.menuText}
+              style={{ textDecoration: "none" }}
+              to="/login"
+            >
+              Login
+            </Link>
+          </Button>
           <IconButton
             size="large"
             aria-label="account of current user"

@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
   formGroup: {
     padding: theme.spacing(2),
   },
-  formInput: {},
 }));
 function LoginForm() {
   const classes = useStyles();
