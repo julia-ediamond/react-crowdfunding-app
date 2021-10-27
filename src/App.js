@@ -1,6 +1,4 @@
 import React from "react";
-
-
 import HomePage from "./pages/HomePage.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -16,22 +14,11 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3),
     height: "100%",
   },
-  media: {
-    height: 140,
-  },
-  title: {
-    color: theme.palette.primary.main,
-  },
-  menu: {
-    height: "40%",
-  }
 }));
 
 function App() {
-  
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <div className="root">
         <Router>
           <div>
@@ -42,7 +29,6 @@ function App() {
               </Route>
               <Route path="/login">
                 <LoginPage />
-                
               </Route>
               <Route path="/">
                 <HomePage />
@@ -55,4 +41,4 @@ function App() {
   );
 }
 
-export default App;
+export default (App)
