@@ -9,6 +9,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
@@ -97,6 +98,7 @@ function Nav() {
               <Typography variant="h6"></Typography>
             </Grid>
           </Grid>
+          <Grid container>
           <Button color="inherit">
             <Link
               color="inherit"
@@ -104,9 +106,24 @@ function Nav() {
               style={{ textDecoration: "none" }}
               to="/login"
             >
-              Login
+              Log in
             </Link>
           </Button>
+          </Grid>
+
+          <Grid container>
+          <Button color="inherit">
+            <Link
+              color="inherit"
+              className={classes.menuText}
+              style={{ textDecoration: "none" }}
+              to="/signup"
+            >
+              Sign up
+            </Link>
+          </Button>
+          </Grid>
+
           <IconButton
             size="large"
             aria-label="account of current user"
