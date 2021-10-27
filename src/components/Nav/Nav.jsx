@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: theme.palette.primary.main,
-  },
+    },
   menuApp: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -41,8 +41,8 @@ function Nav() {
 
   return (
     <Grid className={classes.root}>
-      <AppBar className={classes.menuApp} position="static">
-        <Toolbar className={classes.menu}>
+      <AppBar  position="static">
+        <Toolbar className={classes.menuApp}>
           <IconButton
             id="basic-button"
             aria-controls="basic-menu"
