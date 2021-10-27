@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, Typography, IconButton, Button } from "@material-ui/core";
+import { 
+  Grid, 
+  Typography, 
+  IconButton, 
+  Button,
+ } from "@material-ui/core";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -17,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
   },
   menu: {
-    color: theme.palette.primary.main,
+    color: 'theme.palette.primary.main',
   },
   menuItem: {
     padding: theme.spacing(2),
@@ -28,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Nav() {
+  const token = window.localStorage.getItem('token');
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -37,6 +43,7 @@ function Nav() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
 
   return (
     <Grid className={classes.root}>
@@ -67,7 +74,7 @@ function Nav() {
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={() => window.localStorage.clear()}>Logout</MenuItem>
           </Menu>
           <Grid container className={classes.menu} justifyContent="flex-end">
             <Grid className={classes.menuItem}>
@@ -81,6 +88,12 @@ function Nav() {
                 >
                   Home
                 </Link>
+                {/* {
+                  token 
+                  ?
+                  <button onClick={() => window.localStorage.getItem}</button>
+                  : 
+                } */}
                 </Button>
               </Typography>
             </Grid>
@@ -88,7 +101,15 @@ function Nav() {
               <Typography variant="h6"></Typography>
             </Grid>
           </Grid>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">
+          <Link
+          color="inherit"
+           className={classes.menuText}
+           style={{ textDecoration: "none" }}
+           to="/login"
+         >
+         Login
+         </Link></Button>
           <IconButton
             size="large"
             aria-label="account of current user"

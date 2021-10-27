@@ -1,16 +1,17 @@
 import { createTheme } from '@material-ui/core/styles'
+//import { colors } from '@material-ui/core';
 
 const theme = createTheme({
   palette: {
     primary: { 
-        light: "#4aedc4", 
-        main: "#009688", 
-        dark: "#33ab9f"
+        light: "#f6685e", 
+        main: "#f44336", 
+        dark: "#aa2e25"
 
 }, secondary: {
-    light: '#14a37f',
-    main: '#1de9b6',
-    dark: '#4aedc4',
+    light: '#ab003c',
+    main: '#f50057',
+    dark: '#f73378',
     contrastText: '#000',
 }
 

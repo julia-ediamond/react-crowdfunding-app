@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import HomePage from "./pages/HomePage.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -8,6 +9,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./theme";
 import { makeStyles } from "@material-ui/styles";
 import Nav from "./components/Nav/Nav.jsx";
+import LoginPage from "./pages/LoginPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +39,10 @@ function App() {
             <Switch>
               <Route exact path="/project/:id">
                 <ProjectPage />
+              </Route>
+              <Route path="/login">
+                <LoginPage />
+                
               </Route>
               <Route path="/">
                 <HomePage />
