@@ -85,12 +85,6 @@ function Nav() {
                   >
                     Home
                   </Link>
-                  {/* {
-                  token 
-                  ?
-                  <button onClick={() => window.localStorage.getItem}</button>
-                  : 
-                } */}
                 </Button>
               </Typography>
             </Grid>
@@ -107,6 +101,19 @@ function Nav() {
               to="/login"
             >
               Log in
+            </Link>
+          </Button>
+          </Grid>
+
+          <Grid container>
+          <Button color="inherit">
+            <Link
+              color="inherit"
+              className={classes.menuText}
+              style={{ textDecoration: "none" }}
+              to="/createproject"
+            >
+              Create project
             </Link>
           </Button>
           </Grid>
