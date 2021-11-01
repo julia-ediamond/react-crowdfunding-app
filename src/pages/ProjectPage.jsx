@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/styles";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import DescriptionIcon from "@material-ui/icons/Description";
-
+import Pledge from '../components/Pledge/Pledge';
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
@@ -74,9 +74,9 @@ function ProjectPage(props) {
               <Typography variant="body">Created at: {formattedDate}</Typography>
               </Grid>
               <Grid container>
-                <Avatar>
+                {/* <Avatar>
                   <LockOpenIcon />
-                </Avatar>
+                </Avatar> */}
                 <Typography variant="h5">{`Status:${projectData.is_open}`}</Typography>
               </Grid>
 
@@ -93,6 +93,10 @@ function ProjectPage(props) {
                   );
                 })}
               </Grid>
+
+              <Grid container> 
+              <Pledge />
+               </Grid>
             </Grid>
           </Paper>
         </Grid>

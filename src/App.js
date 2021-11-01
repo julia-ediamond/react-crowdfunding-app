@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/styles";
 import Nav from "./components/Nav/Nav.jsx";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import CreateProject from "./pages/CreateProject";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,9 @@ function App() {
               </Route>
               <Route path="/signup">
                 <SignupPage />
+              </Route>
+              <Route exact path="/createproject">
+                <CreateProject />
               </Route>
               <Route path="/">
                 <HomePage />
