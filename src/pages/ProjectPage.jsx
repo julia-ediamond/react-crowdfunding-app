@@ -1,7 +1,7 @@
 import { React, Fragment, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { oneProject } from "../data";
-import { Grid, Paper, Typography, ListItem, Avatar } from "@material-ui/core";
+import { Grid, Paper, Typography, ListItem, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
@@ -29,15 +29,17 @@ const useStyles = makeStyles((theme) => ({
 
 function ProjectPage(props) {
   const [projectData, setProjectData] = useState({ pledges: [] });
+  const [isUpdating, setIsUpdating] = useState(undefined);
   const { id } = useParams();
-
   const classes = useStyles();
+  const token = window.localStorage.getItem('token');
   //const { projectData } = props;
+
 
   const formattedDate = new Date(projectData?.date_created).toDateString()
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}projects/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}projects/${id}/`)
       .then((results) => {
         return results.json();
       })
@@ -45,15 +47,55 @@ function ProjectPage(props) {
         setProjectData(data);
       });
   }, [id]);
+
+//update the project
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setProjectData({
+      ...projectData,
+      [id]: value,
+    });
+    console.log(projectData);
+  };
+
+  const handleSubmit = async (e) => {
+    console.log("we start editing the project");
+    e.preventDefault();
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}projects/${id}/`,
+      {
+        method: "put",
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(projectData),
+      }
+    );
+    console.log("The response from API ------", response);
+    setIsUpdating(false)
+  };
+
+  //validate that owner = the user who wants to update
   return (
     <Fragment>
       <Grid className={classes.root}>
-        <Grid item xs={12} container justifyContent="center">
-          <Typography variant="h2" className={classes.title}>
+        <Grid 
+        item xs={12} 
+        container justifyContent="center"
+        >
+          <Typography 
+          variant="h2" 
+          className={classes.title}
+          >
             This is {projectData.title}
           </Typography>
         </Grid>
-        <Grid container direction="column" alignItems="center">
+        <Grid 
+        container 
+        direction="column" 
+        alignItems="center"
+        >
           <Paper>
             <Grid item className={classes.projectCard}>
               <Grid container justifyContent="center">
@@ -99,6 +141,9 @@ function ProjectPage(props) {
 
       
              </Grid>
+             <Grid>
+               <Button onClick={handleSubmit}>Edit the project</Button>
+              </Grid>
 
               <Grid container> 
               <Pledge />
