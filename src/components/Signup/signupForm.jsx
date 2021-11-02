@@ -48,10 +48,6 @@ function SignupForm () {
           },
           body: JSON.stringify(credentials)
            
-          // username: "doggo",
-          // password: "12345678",
-          // email: "doggo@doggo.com"
-        ,
         }
       );
       return response.json();
@@ -59,14 +55,9 @@ function SignupForm () {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      // if (credentials.username && credentials.password && credentials.email) {
         postData().then((response) => {
-          //window.localStorage.setItem("token", response.token);
-          //history.push("/login");
           console.log("Response from API---------", response)
         });
-      // }
-
     };
 
 return (
