@@ -21,7 +21,52 @@ const useStyles = makeStyles((theme) => ({
 //   }
 const Pledge = () => {
   const classes = useStyles();
-  
+  const [makePledge, setMakePledge] = useState({
+    pledgeAmount: "",
+    pledgeComment: "",
+    pledgeAnonymous: undefined
+  });
+
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    console.log("This is pledge stuff", value)
+    setMakePledge((prevPledge) => {
+      return {
+        ...prevPledge,
+        [id]: value,
+      };
+    });
+  };
+
+  const postData = async () => {
+    console.log('Im posting a pledge');
+    const token = window.localStorage.getItem('token');
+    console.log("token", token)
+    const response = await fetch(`${process.env.REACT_APP_API_URL}pledges/`, {
+      method: 'post',
+      headers: {
+        "Authorization": `Token ${token}`,
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+          amount: 14,
+          comment: "Love this project!",
+          anonymous: false,
+          project_id: 5
+        }),
+      
+    });
+    return response.json();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postData().then((response) => {
+      console.log('response from our API --------', response);
+      // window.localStorage.setItem('token', response.token);
+      // history.push('/');
+    });
+  };
 
   return (
     <Fragment>
@@ -34,8 +79,8 @@ const Pledge = () => {
         <Grid container justifyContent="center">
           <Typography variant="h4">Make your pledge</Typography>
         </Grid>
-        {/* onSubmit={handleSubmit} */}
-        <form className={classes.form} noValidate>
+        
+        <form className={classes.form}  noValidate>
           <Grid className={classes.formGroup} item xs={12}>
             <InputLabel className={classes.formLabel} htmlFor="username">
               Amount:
@@ -45,7 +90,7 @@ const Pledge = () => {
               type="text"
               id="amount"
               //   placeholder="Enter project name"
-              //onChange={handleChange}
+              onChange={handleChange}
             />
           </Grid>
           <Grid className={classes.formGroup} item xs={12}>
@@ -57,8 +102,25 @@ const Pledge = () => {
               type="text"
               id="comment"
               //   placeholder="category"
-              //   onChange={handleChange}
+              onChange={handleChange}
             />
+          </Grid>
+          <Grid className={classes.formGroup} item xs={12}>
+            <InputLabel className={classes.formLabel} htmlFor="username">
+              Anonymous pledge?:
+            </InputLabel>
+            <Input
+              className={classes.formInput}
+              type="text"
+              id="anonymous"
+              //   placeholder="category"
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid container justifyContent="center">
+            <Button onClick={handleSubmit} variant="contained" type="submit">
+              Make a pledge
+            </Button>
           </Grid>
         </form>
       </Grid>

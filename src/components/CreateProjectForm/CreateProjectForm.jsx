@@ -60,12 +60,12 @@ const CreateProjectForm = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title: "Hello",
+        title: "123456",
         date_created: new Date(),
         description: "Hello Alison",
         goal: 12,
         is_open: true,
-        image: 'http://google.com'
+        image: 'https://picsum.photos/300/300'
       }),
     });
     return response.json();
