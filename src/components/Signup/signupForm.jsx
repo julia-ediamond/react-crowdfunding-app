@@ -1,7 +1,7 @@
-import { React, Fragment, useState, useEffect } from "react";
+import { React, Fragment, useState } from "react";
 import { Grid, Button, Input, InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,8 +23,6 @@ function SignupForm () {
       password: ""
     };
     const [credentials, setCredentials] = useState(initialValues);
-    const history = useHistory();
-
     const handleChange = (event) => {
       const { id, value } = event.target;
       setCredentials((prevCredentials) => {
