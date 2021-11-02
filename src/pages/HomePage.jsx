@@ -53,6 +53,6 @@ function HomePage() {
       </Grid>
     </Fragment>
   );
-}
+};
 
 export default HomePage;
