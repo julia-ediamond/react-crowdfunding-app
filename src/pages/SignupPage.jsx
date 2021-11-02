@@ -1,19 +1,22 @@
 import { React, Fragment } from "react";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-
+import SignupForm from "../components/Signup/SignupForm";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
   },
 }));
 
-function signup() {
+function SignupPage() {
   return (
     <Fragment>
-      <Typography variant="h4">Sign up</Typography>
+      <Grid container justifyContent="center">
+      <Typography variant="h4">Sign up if you don't have an account yet</Typography>
+      </Grid>
+      <SignupForm />
     </Fragment>
   );
 }
 
-export default signup;
+export default SignupPage;

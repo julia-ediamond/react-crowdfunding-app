@@ -66,9 +66,8 @@ function ProjectPage(props) {
               <Grid container justifyContent="center">
                 <Typography variant="h5">{projectData.title}</Typography>
               </Grid>
-              <Grid item xs={10} container justifyContent="center">
-
-                <Typography variant="h5">{projectData.description}</Typography>
+              <Grid container>
+               <Typography variant="h5">{projectData.description}</Typography>
               </Grid>
               <Grid item>
               <Typography variant="h5">Created at: {formattedDate}</Typography>
