@@ -1,7 +1,7 @@
 import { React, Fragment } from "react";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import SignupForm from "../components/Signup/SignupForm";
+import SignupForm from "../components/Signup/signupForm";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
