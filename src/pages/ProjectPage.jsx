@@ -44,7 +44,7 @@ function ProjectPage(props) {
       .then((data) => {
         setProjectData(data);
       });
-  }, []);
+  }, [id]);
   return (
     <Fragment>
       <Grid className={classes.root}>
@@ -64,14 +64,14 @@ function ProjectPage(props) {
                 />
               </Grid>
               <Grid container justifyContent="center">
-                <Typography variant="h5">{oneProject.title}</Typography>
+                <Typography variant="h5">{projectData.title}</Typography>
               </Grid>
               <Grid item xs={10} container justifyContent="center">
 
-                <Typography variant="body">{oneProject.description}</Typography>
+                <Typography variant="h5">{projectData.description}</Typography>
               </Grid>
               <Grid item>
-              <Typography variant="body">Created at: {formattedDate}</Typography>
+              <Typography variant="h5">Created at: {formattedDate}</Typography>
               </Grid>
               <Grid container>
                 {/* <Avatar>
@@ -93,6 +93,13 @@ function ProjectPage(props) {
                   );
                 })}
               </Grid>
+
+              <Grid container>
+               
+               <Typography variant="h5">Pledges total: {projectData.total}</Typography>
+
+      
+             </Grid>
 
               <Grid container> 
               <Pledge />
