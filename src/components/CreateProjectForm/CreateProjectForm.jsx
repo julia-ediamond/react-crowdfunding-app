@@ -1,7 +1,6 @@
-import { React, Fragment, useState, useEffect } from "react";
+import { React, Fragment, useState } from "react";
 import { Grid, Button, Input, InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -97,7 +96,6 @@ const CreateProjectForm = () => {
               className={classes.formInput}
               type="text"
               id="title"
-              placeholder="Enter project name"
               onChange={handleChange}
             />
           </Grid>
@@ -109,7 +107,6 @@ const CreateProjectForm = () => {
               className={classes.formInput}
               type="text"
               id="categories"
-              placeholder="category"
               onChange={handleChange}
             />
           </Grid>
@@ -122,7 +119,6 @@ const CreateProjectForm = () => {
               className={classes.formInput}
               type="text"
               id="description"
-              placeholder="description"
               onChange={handleChange}
             />
           </Grid>
@@ -135,7 +131,6 @@ const CreateProjectForm = () => {
               className={classes.formInput}
               type="text"
               id="goal"
-              placeholder="goal"
               onChange={handleChange}
             />
           </Grid>
@@ -148,7 +143,6 @@ const CreateProjectForm = () => {
               className={classes.formInput}
               type="url"
               id="image"
-              placeholder="image url"
               onChange={handleChange}
             />
           </Grid>
@@ -161,7 +155,6 @@ const CreateProjectForm = () => {
               className={classes.formInput}
               type="text"
               id="is_open"
-              placeholder="is_open"
               onChange={handleChange}
             />
           </Grid>
@@ -174,7 +167,6 @@ const CreateProjectForm = () => {
               className={classes.formInput}
               type="date"
               id="date_created"
-              placeholder="choose date"
               onChange={handleChange}
             />
           </Grid>
