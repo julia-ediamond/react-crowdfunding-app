@@ -30,7 +30,9 @@ const useStyles = makeStyles((theme) => ({
 function ProjectPage(props) {
   const [projectData, setProjectData] = useState({ pledges: [] });
   const [isUpdating, setIsUpdating] = useState(undefined);
-  const { id } = useParams();
+  //const { id } = useParams();
+  var [id, setId] = useState(props.match.params.id)
+  const [errors, setErrors] = useState({})
   const classes = useStyles();
   const token = window.localStorage.getItem('token');
   //const { projectData } = props;
