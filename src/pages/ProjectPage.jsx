@@ -96,16 +96,21 @@ function ProjectPage(props) {
 
   // };
 
+  // This method sends a request to the API. In almost all cases, that is not an instantaneous action.
+  // Therefore we declare this function as asynchronous, telling the function we will have to wait for something
+  // to finish inside it.
   const deleteProject = async () => {
-    await fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`, {
+    // This is our API request, which we need to tell our function to wait for using the key word await
+    await fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}`, {
       method: "delete",
-      header: {
-        Authorization: `Token ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    });
-    history.push("/");
-  };
+      headers: {
+        "Authorization": `Token ${localStorage.getItem('token')}`
+      }
+    })
+    // Once we delete the project above, we then want to navigate back to the homepage
+    // since the project we are looking at, doesn't exist anymore
+    history.push('/')
+  }
 
   //to do validate that owner = the user who wants to update or delete
 
