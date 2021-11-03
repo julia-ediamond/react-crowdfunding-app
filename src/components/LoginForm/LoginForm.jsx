@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
   formGroup: {
     padding: theme.spacing(2),
   },
+  form: {
+    marginTop: theme.spacing(5),
+  },
 }));
 function LoginForm() {
   const classes = useStyles();
@@ -55,7 +58,7 @@ function LoginForm() {
   return (
     <Fragment>
       <Grid container justifyContent="center" spacing={3}>
-        <form onSubmit={handleSubmit} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid className={classes.formGroup} item xs={12}>
             <InputLabel className={classes.formLabel} htmlFor="username">
               Username:
@@ -82,7 +85,7 @@ function LoginForm() {
             />
           </Grid>
           <Grid container justifyContent="center">
-            <Button variant="contained" type="submit">
+            <Button color="primary" variant="contained" type="submit">
               Login
             </Button>
           </Grid>

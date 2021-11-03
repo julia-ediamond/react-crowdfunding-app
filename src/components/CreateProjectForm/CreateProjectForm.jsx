@@ -1,5 +1,5 @@
 import { React, Fragment, useState } from "react";
-import { Grid, Button, Input, InputLabel } from "@material-ui/core";
+import { Grid, Button, Input, InputLabel, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
   },
   formGroup: {
     padding: theme.spacing(2),
-    
   },
 }));
 
@@ -49,14 +48,14 @@ const CreateProjectForm = () => {
     });
   };
   const postData = async () => {
-    console.log('Im posting a project to your API');
-    const token = window.localStorage.getItem('token');
-    console.log("What is token: ", token)
+    console.log("Im posting a project to your API");
+    const token = window.localStorage.getItem("token");
+    console.log("What is token: ", token);
     const response = await fetch(`${process.env.REACT_APP_API_URL}projects/`, {
-      method: 'post',
+      method: "post",
       headers: {
-        "Authorization": `Token ${token}`,
-        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         title: projectInfo.title,
@@ -64,7 +63,7 @@ const CreateProjectForm = () => {
         description: projectInfo.description,
         goal: projectInfo.goal,
         is_open: projectInfo.is_open,
-        image: projectInfo.image
+        image: projectInfo.image,
       }),
     });
     return response.json();
@@ -73,7 +72,7 @@ const CreateProjectForm = () => {
     e.preventDefault();
     // if (window.localStorage.getItem('token')) {
     postData().then((response) => {
-      console.log('response from our API --------', response);
+      console.log("response from our API --------", response);
       // window.localStorage.setItem('token', response.token);
       // history.push('/');
     });
