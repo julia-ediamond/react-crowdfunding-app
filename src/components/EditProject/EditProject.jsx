@@ -3,9 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { 
     Grid, 
-    Paper, 
     Typography, 
-    ListItem, 
     Button, 
     Input, 
     InputLabel 
@@ -33,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 
-  const EditProject = () => {
+  const EditProject = (props) => {
+    
     const [projectData, setProjectData] = useState({ pledges: [] });
     const [isEditing, setIsEditing] = useState(false);
     const { id: project_id } = useParams();
@@ -43,15 +42,16 @@ const useStyles = makeStyles((theme) => ({
     const history = useHistory();
 
     //update the project
-  const handleChange = (event) => {
-    const { id, value } = event.target;
-    console.log("We are updating the ", id, " to be: ", value)
-    setProjectData({
-      ...projectData,
-      [id]: value,
-    });
-    console.log(projectData);
-  };
+    const handleChange = (event) => {
+      const { id, value } = event.target
+      console.log("We are updating the ", id, " to be: ", value)
+      setProjectData({
+        ...projectData,
+        [id]: value
+        
+      })
+      console.log(project_id)
+    }  
 
   const handleSubmit = async (e) => {
     console.log("we start editing the project");
@@ -67,15 +67,15 @@ const useStyles = makeStyles((theme) => ({
         body: JSON.stringify({
           title: projectData.title,
           description: projectData.description,
-          amount: projectData.amount,
+          goal: projectData.goal,
           image: projectData.image         
         }),
       }
     );
     console.log("The response from API ------", {
-        title: projectData.title,
+      title: projectData.title,
         description: projectData.description,
-        amount: projectData.amount,
+        goal: projectData.goal,
         image: projectData.image         
       });
     
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
                     type="text"
                     id="title"
                     
-                    
+                    onChange={handleChange}
                     /> 
                     </Grid>
 
@@ -131,7 +131,7 @@ const useStyles = makeStyles((theme) => ({
                     </Grid>
                     <Grid container>
                     <Grid item xs>
-                      <Button variant="outlined" type="submit" >Submit</Button>
+                      <Button color="primary" variant="outlined" type="submit" >Submit</Button>
                     </Grid>
                     <Grid>
                       <Button item xs variant="outlined" onClick={() => setIsEditing(false)}>Cancel</Button>

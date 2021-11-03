@@ -1,6 +1,7 @@
 import { React, Fragment, useState, useEffect } from "react";
 import { Grid, Button, Typography, Input, InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
 //   }
 const Pledge = () => {
   const classes = useStyles();
+  const { id: project_id } = useParams();
   const [makePledge, setMakePledge] = useState({
     pledgeAmount: "",
     pledgeComment: "",
-    pledgeAnonymous: undefined
+    pledgeAnonymous: undefined,
+    project_id: ""
   });
 
   const handleChange = (event) => {
@@ -39,6 +42,7 @@ const Pledge = () => {
   };
 
   const postData = async () => {
+    
     console.log('Im posting a pledge');
     const token = window.localStorage.getItem('token');
     console.log("token", token)
@@ -49,14 +53,21 @@ const Pledge = () => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-          amount: 14,
-          comment: "Love this project!",
-          anonymous: false,
-          project_id: 5
+        pledgeAmount: makePledge.amount,
+        pledgeComment: makePledge.comment,
+        pledgeAnonymous: makePledge.anonymous,
+        project_id: 13
         }),
-      
+    
     });
-    return response.json();
+    return response.json(),
+    console.log({
+      amount: makePledge.amount,
+      comment: makePledge.comment,
+      anonymous: makePledge.anonymous,
+      project_id: makePledge.id
+    })
+    
   };
 
   const handleSubmit = (e) => {
@@ -118,7 +129,7 @@ const Pledge = () => {
             />
           </Grid>
           <Grid container justifyContent="center">
-            <Button onClick={handleSubmit} variant="contained" type="submit">
+            <Button color="primary" onClick={handleSubmit} variant="contained" type="submit">
               Make a pledge
             </Button>
           </Grid>

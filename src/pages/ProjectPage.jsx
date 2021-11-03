@@ -58,6 +58,7 @@ function ProjectPage(props) {
       })
       .then((data) => {
         setProjectData(data);
+        console.log("This is projectData:", data)
       });
   }, [project_id]);
 
@@ -101,7 +102,7 @@ function ProjectPage(props) {
   // to finish inside it.
   const deleteProject = async () => {
     // This is our API request, which we need to tell our function to wait for using the key word await
-    await fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`, {
       method: "delete",
       headers: {
         "Authorization": `Token ${localStorage.getItem('token')}`
@@ -114,33 +115,31 @@ function ProjectPage(props) {
 
   //to do validate that owner = the user who wants to update or delete
 
-  const ReadProject = () => {
-    return (
-      <div>
-        <h1>{projectData.title}</h1>
-        <h2>{projectData.description}</h2>
-        <h3>Created at: {new Date(projectData.date_created).toDateString()}</h3>
-        <h3>Pledges:</h3>
-        <ul>
-          {projectData.pledges.map((pledgeData, key) => {
-            return (
-              <li key={key}>
-                {pledgeData.amount} from {pledgeData.supporter}
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-    )
-  }
+  // const ReadProject = () => {
+  //   return (
+  //     <div>
+  //       <h1>{projectData.title}</h1>
+  //       <h2>{projectData.description}</h2>
+  //       <h3>Created at: {new Date(projectData.date_created).toDateString()}</h3>
+  //       <h3>Pledges:</h3>
+  //       <ul>
+  //         {projectData.pledges.map((pledgeData, key) => {
+  //           return (
+  //             <li key={key}>
+  //               {pledgeData.amount} from {pledgeData.supporter}
+  //             </li>
+  //           )
+  //         })}
+  //       </ul>
+  //     </div>
+  //   )
+  // }
 
   return (
     <Fragment>
       <Grid className={classes.root}>
         <Grid item xs={12} container justifyContent="center">
-          <Typography variant="h2" className={classes.title}>
-            This is {projectData.title}
-          </Typography>
+        
         </Grid>
         <Grid container direction="column" alignItems="center">
           <Paper>
@@ -149,7 +148,7 @@ function ProjectPage(props) {
                 <img
                   className={classes.projectImage}
                   alt="projectData"
-                  src={oneProject.image}
+                  src={projectData.image}
                 />
               </Grid>
               <Grid container justifyContent="center">
@@ -161,6 +160,11 @@ function ProjectPage(props) {
               <Grid item>
                 <Typography variant="h5">
                   Created at: {formattedDate}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h5">
+                  Goal: {projectData.goal}
                 </Typography>
               </Grid>
               <Grid container>
@@ -177,7 +181,7 @@ function ProjectPage(props) {
                 {projectData.pledges.map((pledgeData, key) => {
                   return (
                     <ListItem>
-                      {pledgeData.amount} from {pledgeData.supporter}
+                      {pledgeData.amount}
                     </ListItem>
                   );
                 })}
@@ -190,14 +194,14 @@ function ProjectPage(props) {
               </Grid>
               {localStorage.getItem("token") && isEditing === false && (
                 <Grid container justifyContent="center">
-                  <Button variant="contained" onClick={() => setIsEditing(true)}>
+                  <Button color="primary" variant="contained" onClick={() => setIsEditing(true)}>
                     Edit project
                   </Button>
                 </Grid>
               )}
 
               {
-                isEditing ? <EditProject /> : <ReadProject />
+                isEditing && <EditProject {...props}/> 
                 // ? (
                 //   <form>
                 //     <Grid>
@@ -251,7 +255,7 @@ function ProjectPage(props) {
               }
               
               <Grid container>
-                <Pledge />
+                <Pledge {...props}/>
               </Grid>
 
               <Grid container justifyContent="center">
