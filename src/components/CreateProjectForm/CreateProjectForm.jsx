@@ -59,12 +59,12 @@ const CreateProjectForm = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title: "123456",
+        title: projectInfo.title,
         date_created: new Date(),
-        description: "Hello Alison",
-        goal: 12,
-        is_open: true,
-        image: 'https://picsum.photos/300/300'
+        description: projectInfo.description,
+        goal: projectInfo.goal,
+        is_open: projectInfo.is_open,
+        image: projectInfo.image
       }),
     });
     return response.json();
@@ -172,7 +172,7 @@ const CreateProjectForm = () => {
           </Grid>
 
           <Grid container justifyContent="center">
-            <Button variant="contained" type="submit">
+            <Button color="primary" variant="contained" type="submit">
               Create project
             </Button>
           </Grid>

@@ -8,7 +8,7 @@ import { ControlCameraOutlined } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   
   root: {
-    padding: theme.spacing(2),
+    
   },
   title: {
     color: 'black',
