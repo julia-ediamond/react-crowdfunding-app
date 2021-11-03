@@ -9,14 +9,13 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
   },
   title: {
     color: theme.palette.primary.main,
-    },
+  },
   menuApp: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -33,20 +32,22 @@ function Nav() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [isLoggeIn, setIsLoggedIn] = useState(window.localStorage.getItem("token"))
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    window.localStorage.getItem("token")
+  );
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-const logout = () => {
-localStorage.clear()
-setIsLoggedIn(false)
-}
+  const logout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+  };
   return (
     <Grid className={classes.root}>
-      <AppBar  position="static">
+      <AppBar position="static">
         <Toolbar className={classes.menuApp}>
           <IconButton
             id="basic-button"
@@ -73,10 +74,7 @@ setIsLoggedIn(false)
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            isLoggedIn
-            <MenuItem onClick={() => window.localStorage.clear()}>
-              Logout
-            </MenuItem>
+            {isLoggedIn && <MenuItem onClick={() => logout()}>Logout</MenuItem>}
           </Menu>
           <Grid container className={classes.menu} justifyContent="flex-end">
             <Grid className={classes.menuItem}>
@@ -97,43 +95,43 @@ setIsLoggedIn(false)
               <Typography variant="h6"></Typography>
             </Grid>
           </Grid>
+
           <Grid container>
-          <Button color="inherit">
-            <Link
-              color="inherit"
-              className={classes.menuText}
-              style={{ textDecoration: "none" }}
-              to="/login"
-            >
-              Log in
-            </Link>
-          </Button>
+            <Button color="inherit">
+              <Link
+                color="inherit"
+                className={classes.menuText}
+                style={{ textDecoration: "none" }}
+                to="/login"
+              >
+                Log in
+              </Link>
+            </Button>
           </Grid>
 
           <Grid container>
-          <Button color="inherit">
-            <Link
-              color="inherit"
-              className={classes.menuText}
-              style={{ textDecoration: "none" }}
-              to="/createproject"
-            >
-              Create project
-            </Link>
-          </Button>
+            <Button color="inherit">
+              <Link
+                color="inherit"
+                className={classes.menuText}
+                style={{ textDecoration: "none" }}
+                to="/signup"
+              >
+                Sign up
+              </Link>
+            </Button>
           </Grid>
-
           <Grid container>
-          <Button color="inherit">
-            <Link
-              color="inherit"
-              className={classes.menuText}
-              style={{ textDecoration: "none" }}
-              to="/signup"
-            >
-              Sign up
-            </Link>
-          </Button>
+            <Button color="inherit">
+              <Link
+                color="inherit"
+                className={classes.menuText}
+                style={{ textDecoration: "none" }}
+                to="/createproject"
+              >
+                Create project
+              </Link>
+            </Button>
           </Grid>
 
           <IconButton
