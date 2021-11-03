@@ -21,7 +21,7 @@ function HomePage() {
 
   useEffect(() => {
     //access .env
-    fetch(`${process.env.REACT_APP_API_URL}projects`)
+    fetch(`${process.env.REACT_APP_API_URL}projects/`)
       .then((results) => {
         console.log("results:", results)
         
