@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
   const EditProject = (props) => {
     
-    const [projectData, setProjectData] = useState({ pledges: [] });
+    const [projectInfo, setProjectInfo] = useState({ pledges: [] });
     const [isEditing, setIsEditing] = useState(false);
     const { id: project_id } = useParams();
     const classes = useStyles();
@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
     const handleChange = (event) => {
       const { id, value } = event.target
       console.log("We are updating the ", id, " to be: ", value)
-      setProjectData({
-        ...projectData,
+      setProjectInfo({
+        ...projectInfo,
         [id]: value
         
       })
@@ -65,18 +65,18 @@ const useStyles = makeStyles((theme) => ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: projectData.title,
-          description: projectData.description,
-          goal: projectData.goal,
-          image: projectData.image         
+          title: projectInfo.title,
+          description: projectInfo.description,
+          goal: projectInfo.goal,
+          image: projectInfo.image         
         }),
       }
     );
     console.log("The response from API ------", {
-      title: projectData.title,
-        description: projectData.description,
-        goal: projectData.goal,
-        image: projectData.image         
+      title: projectInfo.title,
+      description: projectInfo.description,
+      goal: projectInfo.goal,
+      image: projectInfo.image           
       });
     
   };
@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
                     <Grid className={classes.formGroup}> 
                     <InputLabel>Title:</InputLabel>
                     <Input
-                    value={projectData.title}
+                    value={projectInfo.title}
                     type="text"
                     id="title"
                     
@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
                     <Grid className={classes.formGroup}> 
                     <InputLabel>Description:</InputLabel>
                     <Input 
-                    value={projectData.description}
+                    value={projectInfo.description}
                     type="text"
                     id="description"
                     onChange={handleChange}
@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
                     <Grid className={classes.formGroup}> 
                     <InputLabel>Goal:</InputLabel>
                     <Input 
-                    value={projectData.goal}
+                    value={projectInfo.goal}
                     type="text"
                     id="goal"
                     onChange={handleChange}
@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
                     <Grid className={classes.formGroup}> 
                     <InputLabel>Image:</InputLabel>
                     <Input 
-                    value={projectData.image}
+                    value={projectInfo.image}
                     type="text"
                     id="image"
                     onChange={handleChange}
