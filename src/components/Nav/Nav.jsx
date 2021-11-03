@@ -1,13 +1,9 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, Typography, IconButton, Button } from "@material-ui/core";
+import { Grid, IconButton, Button } from "@material-ui/core";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({

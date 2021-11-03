@@ -8,15 +8,11 @@ import {
   Typography,
   ListItem,
   Button,
-  Input,
-  InputLabel,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import DescriptionIcon from "@material-ui/icons/Description";
 import Pledge from "../components/Pledge/Pledge";
 import EditProject from "../components/EditProject/EditProject";
+import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: "black",
+    margin: theme.spacing(3),
+  },
+  topIcon: {
+    marginTop: theme.spacing(2),
   },
   projectCard: {
     width: "45",
@@ -138,9 +138,14 @@ function ProjectPage(props) {
   return (
     <Fragment>
       <Grid className={classes.root}>
-        <Grid item xs={12} container justifyContent="center">
-        
-        </Grid>
+      <Grid className={classes.topIcon} container justifyContent="center">
+            <ImportantDevicesIcon fontSize="large" />
+          </Grid>
+          <Grid container justifyContent="center">
+            <Typography variant="h2" className={classes.title}>
+              Code for good
+            </Typography>
+          </Grid>
         <Grid container direction="column" alignItems="center">
           <Paper>
             <Grid item className={classes.projectCard}>

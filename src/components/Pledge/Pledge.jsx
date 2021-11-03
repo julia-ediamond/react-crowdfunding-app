@@ -27,7 +27,7 @@ const Pledge = () => {
     pledgeAmount: "",
     pledgeComment: "",
     pledgeAnonymous: undefined,
-    project_id: ""
+    pledgeProject_id: ""
   });
 
   const handleChange = (event) => {
@@ -53,20 +53,22 @@ const Pledge = () => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        pledgeAmount: makePledge.amount,
-        pledgeComment: makePledge.comment,
-        pledgeAnonymous: makePledge.anonymous,
-        project_id: 13
-        }),
+        amount: makePledge.amount,
+        comment: makePledge.comment,
+        anonymous: makePledge.anonymous,
+        project_id: makePledge.project_id
+      
+      }),
     
     });
-    return response.json(),
     console.log({
       amount: makePledge.amount,
       comment: makePledge.comment,
       anonymous: makePledge.anonymous,
-      project_id: makePledge.id
+      project_id: makePledge.project_id
     })
+    return response.json()
+
     
   };
 
