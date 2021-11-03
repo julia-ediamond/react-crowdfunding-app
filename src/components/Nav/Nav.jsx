@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import { Grid, Typography, IconButton, Button } from "@material-ui/core";
@@ -31,15 +31,19 @@ const useStyles = makeStyles((theme) => ({
 function Nav() {
   const token = window.localStorage.getItem("token");
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [isLoggeIn, setIsLoggedIn] = useState(window.localStorage.getItem("token"))
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+const logout = () => {
+localStorage.clear()
+setIsLoggedIn(false)
+}
   return (
     <Grid className={classes.root}>
       <AppBar  position="static">
@@ -69,6 +73,7 @@ function Nav() {
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
+            isLoggedIn
             <MenuItem onClick={() => window.localStorage.clear()}>
               Logout
             </MenuItem>
