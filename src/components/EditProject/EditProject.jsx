@@ -32,13 +32,12 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   const EditProject = (props) => {
-    
+    const { displayEditedProject } = props;
     const [projectInfo, setProjectInfo] = useState({ pledges: [] });
     const [isEditing, setIsEditing] = useState(false);
     const { id: project_id } = useParams();
     const classes = useStyles();
     const token = window.localStorage.getItem('token');
-    //const { projectData } = props;
     const history = useHistory();
 
     //update the project
@@ -64,12 +63,14 @@ const useStyles = makeStyles((theme) => ({
           Authorization: `Token ${localStorage.getItem('token')}`,
           "Content-Type": "application/json",
         },
+      
         body: JSON.stringify({
           title: projectInfo.title,
           description: projectInfo.description,
           goal: projectInfo.goal,
           image: projectInfo.image         
-        }),
+        }), 
+        
       }
     );
     console.log("The response from API ------", {
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
       goal: projectInfo.goal,
       image: projectInfo.image           
       });
-    
+      displayEditedProject()
   };
     return (
         <Fragment>
@@ -93,7 +94,6 @@ const useStyles = makeStyles((theme) => ({
                     value={projectInfo.title}
                     type="text"
                     id="title"
-                    
                     onChange={handleChange}
                     /> 
                     </Grid>
@@ -115,7 +115,6 @@ const useStyles = makeStyles((theme) => ({
                     type="text"
                     id="goal"
                     onChange={handleChange}
-                    
                     />
                     </Grid>
 
