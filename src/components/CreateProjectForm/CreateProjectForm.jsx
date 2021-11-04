@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateProjectForm = () => {
+const CreateProjectForm = (props) => {
   const classes = useStyles();
   const [projectInfo, setProjectInfo] = useState({
     projectTitle: "",
@@ -34,8 +34,10 @@ const CreateProjectForm = () => {
       };
     });
   };
+
+
   const postData = async () => {
-    console.log("Im posting a project to your API");
+    const { refreshHomePage } = props;
     const token = window.localStorage.getItem("token");
     console.log("What is token: ", token);
     const response = await fetch(`${process.env.REACT_APP_API_URL}projects/`, {
@@ -53,6 +55,7 @@ const CreateProjectForm = () => {
         image: projectInfo.image,
       }),
     });
+    refreshHomePage();
     return response.json();
   };
   const handleSubmit = (e) => {

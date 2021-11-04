@@ -53,7 +53,6 @@ const Pledge = (props) => {
         anonymous: makePledge.anonymous,
         project_id: makePledge.project_id,
       }),
-      // setMakePledge({})
     });
     console.log({
       amount: makePledge.amount,

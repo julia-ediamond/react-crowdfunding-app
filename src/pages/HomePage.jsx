@@ -20,18 +20,20 @@ function HomePage() {
   const [projectList, setProjectList] = useState([]);
 
   useEffect(() => {
-    //access .env
-    fetch(`${process.env.REACT_APP_API_URL}projects/`)
-      .then((results) => {
-        console.log("results:", results);
-
-        return results.json();
-      })
-      .then((data) => {
-        console.log("data:", data);
-        setProjectList(data);
-      });
+    getAllProjects();
   }, []);
+
+  const getAllProjects = () => {fetch(`${process.env.REACT_APP_API_URL}projects/`)
+  .then((results) => {
+    console.log("results:", results);
+
+    return results.json();
+  })
+  .then((data) => {
+    console.log("data:", data);
+    setProjectList(data);
+  });
+};
   //[] empty array means run when the page loads, we want put hte data into the project list
   return (
     <Fragment>
@@ -51,7 +53,7 @@ function HomePage() {
             return (
               <Grid item xs={3} container justifyContent="center">
                 <Paper>
-                  <ProjectCard projectData={project} />
+                  <ProjectCard refreshHomePage={getAllProjects} projectData={project} />
                 </Paper>
               </Grid>
             );

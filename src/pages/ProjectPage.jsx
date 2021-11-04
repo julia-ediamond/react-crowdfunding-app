@@ -49,14 +49,6 @@ function ProjectPage(props) {
 
   useEffect(() => {
     getProjectData();
-    // fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`)
-    //   .then((results) => {
-    //     return results.json();
-    //   })
-    //   .then((data) => {
-    //     setProjectData(data);
-    //     console.log("This is projectData:", data)
-    //   });
   }, [project_id]);
 
   const getProjectData = () => { 
@@ -69,41 +61,8 @@ function ProjectPage(props) {
     console.log("This is projectData:", data)
   });
 }
-  //update the project
-  // const handleChange = (e) => {
-  //   const { id, value } = e.target;
-  //   console.log("We are updating the ", id, " to be: ", value)
-  //   setProjectData({
-  //     ...projectData,
-  //     [id]: value,
-  //   });
-  //   console.log(projectData);
-  // };
 
-  // const handleSubmit = async (e) => {
-  //   console.log("we start editing the project");
-  //   e.preventDefault();
-  //   const response = await fetch(
-  //     `${process.env.REACT_APP_API_URL}projects/${project_id}/`,
-  //     {
-  //       method: "put",
-  //       headers: {
-  //         Authorization: `Token ${localStorage.getItem('token')}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         title: projectData.title,
-  //         description: projectData.description,
-  //         amount: projectData.amount,
-  //         image: projectData.image,
-  //         is_open: projectData.is_open
-  //       }),
-  //     }
-  //   );
-  //   console.log("The response from API ------", response);
-
-  // };
-
+  //delete project
   // This method sends a request to the API. In almost all cases, that is not an instantaneous action.
   // Therefore we declare this function as asynchronous, telling the function we will have to wait for something
   // to finish inside it.
@@ -160,16 +119,13 @@ function ProjectPage(props) {
                 </Typography>
               </Grid>
               <Grid container>
-                {/* <Avatar>
-                  <LockOpenIcon />
-                </Avatar> */}
                 <Typography variant="h5">{`Status:${projectData.is_open}`}</Typography>
               </Grid>
 
               <Grid container>
                 <Typography variant="h5">Pledges:</Typography>
 
-                {/* key - index of data , while pledge data is actual datat*/}
+                {/* key - index of data, while pledge data is actual data*/}
                 {projectData.pledges.map((pledgeData, key) => {
                   return (
                     <ListItem>
@@ -192,59 +148,7 @@ function ProjectPage(props) {
                 </Grid>
               )}
 
-              {
-                isEditing && <EditProject {...props}/> 
-                // ? (
-                //   <form>
-                //     <Grid>
-                //     <InputLabel>Title:</InputLabel>
-                //     <Input
-                //     value={projectData.title}
-                //     type="text"
-                //     id="title"
-                //     onChange={handleChange}
-                //     />
-                //     </Grid>
-
-                //     <Grid>
-                //     <InputLabel>Description:</InputLabel>
-                //     <Input
-                //     value={projectData.description}
-                //     type="text"
-                //     id="description"
-                //     onChange={handleChange}
-                //     />
-                //     </Grid>
-                //     <Grid>
-                //     <InputLabel>Goal:</InputLabel>
-                //     <Input
-                //     value={projectData.goal}
-                //     type="text"
-                //     id="goal"
-                //     onChange={handleChange}
-                //     />
-                //     </Grid>
-
-                //     <Grid>
-                //     <InputLabel>Image:</InputLabel>
-                //     <Input
-                //     value={projectData.image}
-                //     type="text"
-                //     id="image"
-                //     onChange={handleChange}
-                //     />
-                //     </Grid>
-
-                //     <Grid>
-                //       <Button onSubmit={handleSubmit}>Submit</Button>
-                //     </Grid>
-                //     <Grid>
-                //       <Button onClick={() => setIsEditing(false)}>Cancel</Button>
-                //      </Grid>
-                //   </form>
-                // )
-                // : <ReadProject />
-              }
+              {isEditing && <EditProject displayEditedProject={getProjectData}/>}
               
               <Grid container>
                 <Pledge refreshProjectData={getProjectData}/>
