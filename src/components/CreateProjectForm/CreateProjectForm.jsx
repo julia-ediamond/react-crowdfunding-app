@@ -13,19 +13,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//   {
-//     "id": 99,
-//     "title": "Project 99",
-//       "categories": [
-//     "health"
-//      ],
-//     "description": "The first project.",
-//     "goal": 150,
-//     "image": "https://via.placeholder.com/300.jpg",
-//       "date_created": "2020-09-20T14:28:23.382748Z",
-//     "is_open": true
-
-// }
 const CreateProjectForm = () => {
   const classes = useStyles();
   const [projectInfo, setProjectInfo] = useState({
