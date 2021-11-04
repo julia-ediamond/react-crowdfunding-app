@@ -9,9 +9,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3),
     width: "100%",
   },
-  media: {
-    height: 140,
-  },
   title: {
     color: theme.palette.primary.main,
   },

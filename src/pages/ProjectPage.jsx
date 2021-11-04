@@ -48,16 +48,27 @@ function ProjectPage(props) {
   const formattedDate = new Date(projectData?.date_created).toDateString();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`)
-      .then((results) => {
-        return results.json();
-      })
-      .then((data) => {
-        setProjectData(data);
-        console.log("This is projectData:", data)
-      });
+    getProjectData();
+    // fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`)
+    //   .then((results) => {
+    //     return results.json();
+    //   })
+    //   .then((data) => {
+    //     setProjectData(data);
+    //     console.log("This is projectData:", data)
+    //   });
   }, [project_id]);
 
+  const getProjectData = () => { 
+    fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`)
+  .then((results) => {
+    return results.json();
+  })
+  .then((data) => {
+    setProjectData(data);
+    console.log("This is projectData:", data)
+  });
+}
   //update the project
   // const handleChange = (e) => {
   //   const { id, value } = e.target;
@@ -111,26 +122,6 @@ function ProjectPage(props) {
 
   //to do validate that owner = the user who wants to update or delete
 
-  // const ReadProject = () => {
-  //   return (
-  //     <div>
-  //       <h1>{projectData.title}</h1>
-  //       <h2>{projectData.description}</h2>
-  //       <h3>Created at: {new Date(projectData.date_created).toDateString()}</h3>
-  //       <h3>Pledges:</h3>
-  //       <ul>
-  //         {projectData.pledges.map((pledgeData, key) => {
-  //           return (
-  //             <li key={key}>
-  //               {pledgeData.amount} from {pledgeData.supporter}
-  //             </li>
-  //           )
-  //         })}
-  //       </ul>
-  //     </div>
-  //   )
-  // }
-
   return (
     <Fragment>
       <Grid className={classes.root}>
@@ -165,7 +156,7 @@ function ProjectPage(props) {
               </Grid>
               <Grid item>
                 <Typography variant="h5">
-                  Goal: {projectData.goal}
+                  Goal: $ {projectData.goal}
                 </Typography>
               </Grid>
               <Grid container>
@@ -182,7 +173,7 @@ function ProjectPage(props) {
                 {projectData.pledges.map((pledgeData, key) => {
                   return (
                     <ListItem>
-                      {pledgeData.amount}
+                      ${pledgeData.amount} with comment: {pledgeData.comment}
                     </ListItem>
                   );
                 })}
@@ -190,7 +181,7 @@ function ProjectPage(props) {
 
               <Grid container>
                 <Typography variant="h5">
-                  Pledges total: {projectData.total}
+                  Pledges total: ${projectData.total}
                 </Typography>
               </Grid>
               {localStorage.getItem("token") && isEditing === false && (
@@ -256,7 +247,7 @@ function ProjectPage(props) {
               }
               
               <Grid container>
-                <Pledge {...props}/>
+                <Pledge refreshProjectData={getProjectData}/>
               </Grid>
 
               <Grid container justifyContent="center">
