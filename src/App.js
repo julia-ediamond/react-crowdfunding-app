@@ -3,7 +3,6 @@ import HomePage from "./pages/HomePage.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./theme";
 import { makeStyles } from "@material-ui/styles";
 import Nav from "./components/Nav/Nav.jsx";

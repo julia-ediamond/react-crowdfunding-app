@@ -22,12 +22,13 @@ const useStyles = makeStyles((theme) => ({
 //   }
 const Pledge = () => {
   const classes = useStyles();
-  const { id: project_id } = useParams();
+  //const { id: project_id } = useParams();
+  const { id } = useParams();
   const [makePledge, setMakePledge] = useState({
     pledgeAmount: "",
     pledgeComment: "",
     pledgeAnonymous: undefined,
-    pledgeProject_id: ""
+    pledgeProject_id: "id"
   });
 
   const handleChange = (event) => {
@@ -90,7 +91,7 @@ const Pledge = () => {
         spacing={3}
       >
         <Grid container justifyContent="center">
-          <Typography variant="h4">Make your pledge</Typography>
+          <Typography variant="h4">Make your pledge for project with id {id}</Typography>
         </Grid>
         
         <form className={classes.form}  noValidate>
@@ -126,6 +127,18 @@ const Pledge = () => {
               className={classes.formInput}
               type="text"
               id="anonymous"
+              //   placeholder="category"
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid className={classes.formGroup} item xs={12}>
+            <InputLabel className={classes.formLabel} htmlFor="username">
+              Project_id:
+            </InputLabel>
+            <Input
+              className={classes.formInput}
+              type="text"
+              id="project_id"
               //   placeholder="category"
               onChange={handleChange}
             />

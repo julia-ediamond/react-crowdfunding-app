@@ -1,7 +1,6 @@
 import { React, Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { oneProject } from "../data";
 import {
   Grid,
   Paper,
@@ -18,9 +17,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
     width: "100%",
-  },
-  media: {
-    height: 140,
   },
   title: {
     color: "black",
