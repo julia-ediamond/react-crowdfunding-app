@@ -1,22 +1,24 @@
 import { React, Fragment, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { oneProject } from "../data";
 import { Grid, Paper, Typography, ListItem, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import DescriptionIcon from "@material-ui/icons/Description";
-import Pledge from '../components/Pledge/Pledge';
+import Pledge from "../components/Pledge/Pledge";
+import EditProject from "../components/EditProject/EditProject";
+import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
+import CreateProjectForm from "../components/CreateProjectForm/CreateProjectForm";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
     width: "100%",
   },
-  media: {
-    height: 140,
-  },
   title: {
-    color: 'black',
+    color: "black",
+    margin: theme.spacing(3),
+  },
+  topIcon: {
+    marginTop: theme.spacing(2),
   },
   projectCard: {
     width: "45",
@@ -27,129 +29,142 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProjectPage(props) {
+function ProjectPage() {
   const [projectData, setProjectData] = useState({ pledges: [] });
-  const [isUpdating, setIsUpdating] = useState(undefined);
-  //const { id } = useParams();
-  var [id, setId] = useState(props.match.params.id)
-  const [errors, setErrors] = useState({})
+  const [isEditing, setIsEditing] = useState(false);
+  const { id: project_id } = useParams();
+  //var [id, setId] = useState(props.match.params.id)
+  const [error, setError] = useState(false);
   const classes = useStyles();
-  const token = window.localStorage.getItem('token');
+  const token = window.localStorage.getItem("token");
   //const { projectData } = props;
+  const history = useHistory();
 
-
-  const formattedDate = new Date(projectData?.date_created).toDateString()
+  const formattedDate = new Date(projectData?.date_created).toDateString();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}projects/${id}/`)
+    getProjectData();
+  }, [project_id]);
+
+  const getProjectData = () => {
+    fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`)
       .then((results) => {
         return results.json();
       })
       .then((data) => {
         setProjectData(data);
+        console.log("This is projectData:", data);
       });
-  }, [id]);
+  };
 
-//update the project
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setProjectData({
-      ...projectData,
-      [id]: value,
+  //delete project
+  // This method sends a request to the API. In almost all cases, that is not an instantaneous action.
+  // Therefore we declare this function as asynchronous, telling the function we will have to wait for something
+  // to finish inside it.
+  const deleteProject = async () => {
+    setError(false);
+    // This is our API request, which we need to tell our function to wait for using the key word await
+    await fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`, {
+      method: "delete",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+      if(error) {
+        setError(true);
+        return <div>You are not authorised to delete this project</div>;
+      },
     });
-    console.log(projectData);
+    // Once we delete the project above, we then want to navigate back to the homepage
+    // since the project we are looking at, doesn't exist anymore
+    history.push("/");
   };
+  //to do validate that owner = the user who wants to update or delete
 
-  const handleSubmit = async (e) => {
-    console.log("we start editing the project");
-    e.preventDefault();
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}projects/${id}/`,
-      {
-        method: "put",
-        headers: {
-          Authorization: `Token ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(projectData),
-      }
-    );
-    console.log("The response from API ------", response);
-    setIsUpdating(false)
-  };
-
-  //validate that owner = the user who wants to update
   return (
     <Fragment>
       <Grid className={classes.root}>
-        <Grid 
-        item xs={12} 
-        container justifyContent="center"
-        >
-          <Typography 
-          variant="h2" 
-          className={classes.title}
-          >
-            This is {projectData.title}
+        <Grid className={classes.topIcon} container justifyContent="center">
+          <ImportantDevicesIcon fontSize="large" />
+        </Grid>
+        <Grid container justifyContent="center">
+          <Typography variant="h2" className={classes.title}>
+            Code for good
           </Typography>
         </Grid>
-        <Grid 
-        container 
-        direction="column" 
-        alignItems="center"
-        >
+        <Grid container direction="column" alignItems="center">
           <Paper>
             <Grid item className={classes.projectCard}>
               <Grid container justifyContent="center">
                 <img
                   className={classes.projectImage}
                   alt="projectData"
-                  src={oneProject.image}
+                  src={projectData.image}
                 />
               </Grid>
               <Grid container justifyContent="center">
                 <Typography variant="h5">{projectData.title}</Typography>
               </Grid>
               <Grid container>
-               <Typography variant="h5">{projectData.description}</Typography>
+                <Typography variant="h5">{projectData.description}</Typography>
               </Grid>
               <Grid item>
-              <Typography variant="h5">Created at: {formattedDate}</Typography>
+                <Typography variant="h5">
+                  Created at: {formattedDate}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h5">Goal: $ {projectData.goal}</Typography>
               </Grid>
               <Grid container>
-                {/* <Avatar>
-                  <LockOpenIcon />
-                </Avatar> */}
                 <Typography variant="h5">{`Status:${projectData.is_open}`}</Typography>
               </Grid>
 
               <Grid container>
-               
                 <Typography variant="h5">Pledges:</Typography>
 
-                {/* key - index of data , while pledge data is actual datat*/}
+                {/* key - index of data, while pledge data is actual data*/}
                 {projectData.pledges.map((pledgeData, key) => {
                   return (
                     <ListItem>
-                      {pledgeData.amount} from {pledgeData.supporter}
+                      ${pledgeData.amount} with comment: {pledgeData.comment}
                     </ListItem>
                   );
                 })}
               </Grid>
 
               <Grid container>
-               
-               <Typography variant="h5">Pledges total: {projectData.total}</Typography>
+                <Typography variant="h5">
+                  Pledges total: ${projectData.total}
+                </Typography>
+              </Grid>
+              {localStorage.getItem("token") && isEditing === false && (
+                <Grid container justifyContent="center">
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    Edit project
+                  </Button>
+                </Grid>
+              )}
 
-      
-             </Grid>
-             <Grid>
-               <Button onClick={handleSubmit}>Edit the project</Button>
+              {isEditing && (
+                <EditProject displayEditedProject={getProjectData} />
+              )}
+
+              <Grid container>
+                <Pledge refreshProjectData={getProjectData} />
               </Grid>
 
-              <Grid container> 
-              <Pledge />
-               </Grid>
+              <Grid container justifyContent="center">
+                {localStorage.getItem("token") && (
+                  <Button variant="outlined" onClick={deleteProject}>
+                    {" "}
+                    Delete project
+                  </Button>
+                )}
+              </Grid>
             </Grid>
           </Paper>
         </Grid>

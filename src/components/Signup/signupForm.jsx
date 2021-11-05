@@ -2,7 +2,6 @@ import { React, Fragment, useState } from "react";
 import { Grid, Button, Input, InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
@@ -11,7 +10,9 @@ const useStyles = makeStyles((theme) => ({
   },
   formGroup: {
     padding: theme.spacing(2),
-    
+  },
+  form: {
+    marginTop: theme.spacing(5),
   },
 }));
 
@@ -61,7 +62,7 @@ function SignupForm () {
 return (
     <Fragment>
       <Grid container justifyContent="center" spacing={3}>
-        <form  noValidate>
+        <form className={classes.form} noValidate>
           <Grid className={classes.formGroup} item xs={12}>
             <InputLabel className={classes.formLabel} htmlFor="username">
               Username:
@@ -103,7 +104,7 @@ return (
             />
           </Grid>
           <Grid onClick={handleSubmit} container justifyContent="center">
-            <Button variant="contained" type="submit">
+            <Button color="primary" variant="contained" type="submit">
               Sign up
             </Button>
           </Grid>

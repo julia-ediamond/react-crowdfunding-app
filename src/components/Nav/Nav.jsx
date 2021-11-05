@@ -1,14 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { React, useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, Typography, IconButton, Button } from "@material-ui/core";
+import { Grid, IconButton, Button } from "@material-ui/core";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,9 +12,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: theme.palette.primary.main,
-    },
+  },
   menuApp: {
     backgroundColor: theme.palette.primary.main,
+    
   },
   menuItem: {
     padding: theme.spacing(2),
@@ -31,25 +28,31 @@ const useStyles = makeStyles((theme) => ({
 function Nav() {
   const token = window.localStorage.getItem("token");
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    window.localStorage.getItem("token")
+  );
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
+  const logout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
     <Grid className={classes.root}>
-      <AppBar  position="static">
+      <AppBar position="static">
         <Toolbar className={classes.menuApp}>
-          <IconButton
+          {/* <IconButton
             id="basic-button"
             aria-controls="basic-menu"
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
+            //onClick={handleClick}
             size="large"
             edge="start"
             color="inherit"
@@ -57,8 +60,8 @@ function Nav() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
-          <Menu
+          </IconButton> */}
+          {/* <Menu
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
@@ -69,68 +72,62 @@ function Nav() {
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={() => window.localStorage.clear()}>
-              Logout
-            </MenuItem>
-          </Menu>
-          <Grid container className={classes.menu} justifyContent="flex-end">
-            <Grid className={classes.menuItem}>
-              <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                <Button>
-                  <Link
-                    color="inherit"
-                    className={classes.menuText}
-                    style={{ textDecoration: "none" }}
-                    to="/"
-                  >
-                    Home
-                  </Link>
-                </Button>
-              </Typography>
-            </Grid>
-            <Grid className={classes.menuItem}>
-              <Typography variant="h6"></Typography>
-            </Grid>
-          </Grid>
-          <Grid container>
-          <Button color="inherit">
-            <Link
-              color="inherit"
-              className={classes.menuText}
-              style={{ textDecoration: "none" }}
+            {isLoggedIn && <MenuItem onClick={() => logout()}>Logout</MenuItem>}
+            <MenuItem
+              path
               to="/login"
+              //onClick={handleClose}
+            >
+              Login
+            </MenuItem> */}
+          {/* </Menu> */}
+          
+            <Grid item xs={6} className={classes.menuItem}>
+               <Button 
+               color="inherit" 
+               component={NavLink} 
+               to="/"
+               >
+                  Home
+                </Button>
+            </Grid>
+          
+
+          <Grid item xs={6}>
+            <Button 
+            to="/login" 
+            color="inherit" 
+            component={NavLink}
             >
               Log in
-            </Link>
-          </Button>
+            </Button>
           </Grid>
 
-          <Grid container>
-          <Button color="inherit">
-            <Link
-              color="inherit"
-              className={classes.menuText}
-              style={{ textDecoration: "none" }}
-              to="/createproject"
-            >
-              Create project
-            </Link>
-          </Button>
-          </Grid>
-
-          <Grid container>
-          <Button color="inherit">
-            <Link
-              color="inherit"
-              className={classes.menuText}
-              style={{ textDecoration: "none" }}
-              to="/signup"
+          <Grid item xs={6}>
+            <Button 
+            to="/signup" 
+            color="inherit" 
+            component={NavLink}
             >
               Sign up
-            </Link>
-          </Button>
+            </Button>
           </Grid>
-
+          <Grid item xs={6}>
+            <Button 
+            color="inherit" 
+            component={NavLink} 
+            to="/createproject"
+            >
+              Create project
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+              {isLoggedIn && 
+              <Button 
+              color="inherit" 
+              onClick={() => logout()}
+              >Logout</Button>}
+          </Grid>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -141,6 +138,7 @@ function Nav() {
           >
             <AccountCircle />
           </IconButton>
+          
         </Toolbar>
       </AppBar>
     </Grid>
