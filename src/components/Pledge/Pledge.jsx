@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 const Pledge = (props) => {
   const classes = useStyles();
   const { refreshProjectData } = props;
-  //const { id: project_id } = useParams();
   const { id } = useParams();
   const [makePledge, setMakePledge] = useState({
     pledgeAmount: "",
@@ -71,10 +70,6 @@ const Pledge = (props) => {
     });
   };
 
-  // useEffect (() => {
-  //   postData()
-  // }, [])
-
   return (
     <Fragment>
       <Grid
@@ -98,7 +93,6 @@ const Pledge = (props) => {
               className={classes.formInput}
               type="text"
               id="amount"
-              //   placeholder="Enter project name"
               onChange={handleChange}
             />
           </Grid>
@@ -110,31 +104,28 @@ const Pledge = (props) => {
               className={classes.formInput}
               type="text"
               id="comment"
-              //   placeholder="category"
               onChange={handleChange}
             />
           </Grid>
           <Grid className={classes.formGroup} item xs={12}>
             <InputLabel className={classes.formLabel} htmlFor="username">
-              Anonymous pledge?:
+              Is pledge anonynous?:
             </InputLabel>
             <Input
               className={classes.formInput}
               type="text"
               id="anonymous"
-              //   placeholder="category"
               onChange={handleChange}
             />
           </Grid>
           <Grid className={classes.formGroup} item xs={12}>
             <InputLabel className={classes.formLabel} htmlFor="username">
-              Project_id:
+              Project id:
             </InputLabel>
             <Input
               className={classes.formInput}
               type="text"
               id="project_id"
-              //   placeholder="category"
               onChange={handleChange}
             />
           </Grid>

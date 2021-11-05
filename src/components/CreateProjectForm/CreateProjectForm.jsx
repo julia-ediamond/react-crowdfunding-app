@@ -1,7 +1,7 @@
 import { React, Fragment, useState } from "react";
 import { Grid, Button, Input, InputLabel, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
@@ -36,8 +36,8 @@ const CreateProjectForm = (props) => {
   };
 
 
-  const postData = async () => {
-    const { refreshHomePage } = props;
+  const postData = async (props) => {
+    //const { displayNewProject } = props;
     const token = window.localStorage.getItem("token");
     console.log("What is token: ", token);
     const response = await fetch(`${process.env.REACT_APP_API_URL}projects/`, {
@@ -46,6 +46,7 @@ const CreateProjectForm = (props) => {
         Authorization: `Token ${token}`,
         "Content-Type": "application/json",
       },
+      
       body: JSON.stringify({
         title: projectInfo.title,
         date_created: new Date(),
@@ -54,19 +55,22 @@ const CreateProjectForm = (props) => {
         is_open: projectInfo.is_open,
         image: projectInfo.image,
       }),
+      
     });
-    refreshHomePage();
+    //displayNewProject();
+     
+  
     return response.json();
+    
   };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (window.localStorage.getItem('token')) {
     postData().then((response) => {
       console.log("response from our API --------", response);
-      // window.localStorage.setItem('token', response.token);
-      // history.push('/');
+      
     });
-    // }
+    
   };
   return (
     <Fragment>
