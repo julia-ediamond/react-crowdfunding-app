@@ -11,7 +11,7 @@ The application Code for good is still being built. The current features are:
 3. Users can see individual project details, pledge for chosen projects, see totals of pledges and comments of supporters. 
 ![Pledges](/pledges.png)
 4. Authorised users can edit and delete their projects. 
-![Pledges](/pledges.png)
+![Edit project](/edit.png)
 
 ### Features to be implemented next: 
 1. Hide edit and delete buttons to those users who don't own projects. 
