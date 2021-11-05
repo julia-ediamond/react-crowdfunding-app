@@ -1,6 +1,6 @@
 # Code for good 
 
-This is a crowdfunding app named Code for good. It was built for learning purposes at She Codes Plus. This is a fullstack application built with React on the frontend. It fetched data from REST API built with Django Rest Framework which is also deployed on Heroku [See it here](https://quiet-hamlet-41512.herokuapp.com/projects/).
+This is a crowdfunding app named Code for good. It was built for learning purposes at She Codes Plus. This is a fullstack application built with React and React Material-Ui on the frontend. It fetches data from REST API built with Django Rest Framework which is also deployed on Heroku [See it here](https://quiet-hamlet-41512.herokuapp.com/projects/).
 
 ## Features
 
