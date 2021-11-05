@@ -6,7 +6,7 @@ This is a crowdfunding app named Code for good. It was built for learning purpos
 
 The application Code for good is still being built. The current features are: 
 1. Homepage displays all projects
-![GitHub Logo](/images/logo.png)
+![Homepage](/homep.png)
 2. Users can signup/login. Authentication is handled with a token
 3. Users can see individual projectdetails, pledge for chosen projects, see totals of pledges and comments of supporters. 
 4. Authorised users can edit and delete their projects. 
