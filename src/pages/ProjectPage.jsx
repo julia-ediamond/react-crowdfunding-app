@@ -1,17 +1,12 @@
 import { React, Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import {
-  Grid,
-  Paper,
-  Typography,
-  ListItem,
-  Button,
-} from "@material-ui/core";
+import { Grid, Paper, Typography, ListItem, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Pledge from "../components/Pledge/Pledge";
 import EditProject from "../components/EditProject/EditProject";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
+import CreateProjectForm from "../components/CreateProjectForm/CreateProjectForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,12 +29,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProjectPage(props) {
+function ProjectPage() {
   const [projectData, setProjectData] = useState({ pledges: [] });
   const [isEditing, setIsEditing] = useState(false);
   const { id: project_id } = useParams();
   //var [id, setId] = useState(props.match.params.id)
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState(false);
   const classes = useStyles();
   const token = window.localStorage.getItem("token");
   //const { projectData } = props;
@@ -51,47 +46,51 @@ function ProjectPage(props) {
     getProjectData();
   }, [project_id]);
 
-  const getProjectData = () => { 
+  const getProjectData = () => {
     fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`)
-  .then((results) => {
-    return results.json();
-  })
-  .then((data) => {
-    setProjectData(data);
-    console.log("This is projectData:", data)
-  });
-}
+      .then((results) => {
+        return results.json();
+      })
+      .then((data) => {
+        setProjectData(data);
+        console.log("This is projectData:", data);
+      });
+  };
 
   //delete project
   // This method sends a request to the API. In almost all cases, that is not an instantaneous action.
   // Therefore we declare this function as asynchronous, telling the function we will have to wait for something
   // to finish inside it.
   const deleteProject = async () => {
+    setError(false);
     // This is our API request, which we need to tell our function to wait for using the key word await
     await fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`, {
       method: "delete",
       headers: {
-        "Authorization": `Token ${localStorage.getItem('token')}`
-      }
-    })
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+      if(error) {
+        setError(true);
+        return <div>You are not authorised to delete this project</div>;
+      },
+    });
     // Once we delete the project above, we then want to navigate back to the homepage
     // since the project we are looking at, doesn't exist anymore
-    history.push('/')
-  }
-
+    history.push("/");
+  };
   //to do validate that owner = the user who wants to update or delete
 
   return (
     <Fragment>
       <Grid className={classes.root}>
-      <Grid className={classes.topIcon} container justifyContent="center">
-            <ImportantDevicesIcon fontSize="large" />
-          </Grid>
-          <Grid container justifyContent="center">
-            <Typography variant="h2" className={classes.title}>
-              Code for good
-            </Typography>
-          </Grid>
+        <Grid className={classes.topIcon} container justifyContent="center">
+          <ImportantDevicesIcon fontSize="large" />
+        </Grid>
+        <Grid container justifyContent="center">
+          <Typography variant="h2" className={classes.title}>
+            Code for good
+          </Typography>
+        </Grid>
         <Grid container direction="column" alignItems="center">
           <Paper>
             <Grid item className={classes.projectCard}>
@@ -114,9 +113,7 @@ function ProjectPage(props) {
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography variant="h5">
-                  Goal: $ {projectData.goal}
-                </Typography>
+                <Typography variant="h5">Goal: $ {projectData.goal}</Typography>
               </Grid>
               <Grid container>
                 <Typography variant="h5">{`Status:${projectData.is_open}`}</Typography>
@@ -142,22 +139,31 @@ function ProjectPage(props) {
               </Grid>
               {localStorage.getItem("token") && isEditing === false && (
                 <Grid container justifyContent="center">
-                  <Button color="primary" variant="contained" onClick={() => setIsEditing(true)}>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={() => setIsEditing(true)}
+                  >
                     Edit project
                   </Button>
                 </Grid>
               )}
 
-              {isEditing && <EditProject displayEditedProject={getProjectData}/>}
-              
+              {isEditing && (
+                <EditProject displayEditedProject={getProjectData} />
+              )}
+
               <Grid container>
-                <Pledge refreshProjectData={getProjectData}/>
+                <Pledge refreshProjectData={getProjectData} />
               </Grid>
 
               <Grid container justifyContent="center">
-              {localStorage.getItem("token") && (
-                <Button variant="outlined" onClick={deleteProject}> Delete project</Button>
-              )}
+                {localStorage.getItem("token") && (
+                  <Button variant="outlined" onClick={deleteProject}>
+                    {" "}
+                    Delete project
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </Paper>

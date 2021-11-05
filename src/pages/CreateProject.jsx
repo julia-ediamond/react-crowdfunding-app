@@ -34,7 +34,7 @@ const CreateProject = () => {
           <Typography variant="h4">Create your project</Typography>
         </Grid>
         <Grid container justifyContent="center">
-          <CreateProjectForm />
+         <CreateProjectForm /> 
         </Grid>
       </Grid>
     </Fragment>

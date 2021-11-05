@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     const { displayEditedProject } = props;
     const [projectInfo, setProjectInfo] = useState({ pledges: [] });
     const [isEditing, setIsEditing] = useState(false);
+    const [error, setError] = useState(null);
     const { id: project_id } = useParams();
     const classes = useStyles();
     const token = window.localStorage.getItem('token');
@@ -53,9 +54,10 @@ const useStyles = makeStyles((theme) => ({
     }  
 
   const handleSubmit = async (e) => {
-    console.log("we start editing the project");
+    //setError(false)
     e.preventDefault();
-    await fetch(
+    try {
+    const response = await fetch(
       `${process.env.REACT_APP_API_URL}projects/${project_id}/`,
       {
         method: "put",
@@ -70,9 +72,20 @@ const useStyles = makeStyles((theme) => ({
           goal: projectInfo.goal,
           image: projectInfo.image         
         }), 
-        
       }
-    );
+    )
+    if (!response.ok) {
+      const { detail } = await response.json()
+      
+      if(response.status === 403)
+        return alert(detail)
+
+        setError(detail)
+    }
+  } catch (error) {
+    setError(error.message)
+  }
+  
     console.log("The response from API ------", {
       title: projectInfo.title,
       description: projectInfo.description,
@@ -80,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
       image: projectInfo.image           
       });
       displayEditedProject()
-  };
+ }
     return (
         <Fragment>
             <Grid container justifyContent="center">
