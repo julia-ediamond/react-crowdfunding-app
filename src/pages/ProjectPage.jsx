@@ -46,7 +46,7 @@ function ProjectPage() {
     getProjectData();
   }, [project_id]);
 
-  const getProjectData = () => {
+  const getProjectData = (props) => {
     fetch(`${process.env.REACT_APP_API_URL}projects/${project_id}/`)
       .then((results) => {
         return results.json();
