@@ -19,10 +19,10 @@ const Pledge = (props) => {
   const { refreshProjectData } = props;
   const { id } = useParams();
   const [makePledge, setMakePledge] = useState({
-    pledgeAmount: "",
-    pledgeComment: "",
-    pledgeAnonymous: undefined,
-    pledgeProject_id: "id",
+    amount: "",
+    comment: "",
+    anonymous: undefined,
+    project_id: id,
   });
 
   const handleChange = (event) => {
@@ -46,19 +46,9 @@ const Pledge = (props) => {
         Authorization: `Token ${token}`,
         "Content-type": "application/json",
       },
-      body: JSON.stringify({
-        amount: makePledge.amount,
-        comment: makePledge.comment,
-        anonymous: makePledge.anonymous,
-        project_id: makePledge.project_id,
-      }),
+      body: JSON.stringify(makePledge),
     });
-    console.log({
-      amount: makePledge.amount,
-      comment: makePledge.comment,
-      anonymous: makePledge.anonymous,
-      project_id: makePledge.project_id,
-    });
+    console.log(makePledge);
     refreshProjectData();
     return response.json();
   };
