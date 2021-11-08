@@ -70,7 +70,7 @@ const Pledge = (props) => {
       >
         <Grid container justifyContent="center">
           <Typography variant="h4">
-            Make your pledge for project with id {id}
+            Make your pledge for project
           </Typography>
         </Grid>
 
