@@ -97,28 +97,6 @@ const Pledge = (props) => {
               onChange={handleChange}
             />
           </Grid>
-          <Grid className={classes.formGroup} item xs={12}>
-            <InputLabel className={classes.formLabel} htmlFor="username">
-              Is pledge anonynous?:
-            </InputLabel>
-            <Input
-              className={classes.formInput}
-              type="text"
-              id="anonymous"
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid className={classes.formGroup} item xs={12}>
-            <InputLabel className={classes.formLabel} htmlFor="username">
-              Project id:
-            </InputLabel>
-            <Input
-              className={classes.formInput}
-              type="text"
-              id="project_id"
-              onChange={handleChange}
-            />
-          </Grid>
           <Grid container justifyContent="center">
             <Button
               color="primary"
