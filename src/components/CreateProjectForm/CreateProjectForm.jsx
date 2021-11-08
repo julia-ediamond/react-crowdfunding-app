@@ -1,6 +1,7 @@
 import { React, Fragment, useState } from "react";
 import { Grid, Button, Input, InputLabel, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { useHistory, useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,14 +16,16 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateProjectForm = (props) => {
   const classes = useStyles();
+  const history = useHistory();
+  const { project_id } = useParams();
   const [projectInfo, setProjectInfo] = useState({
-    projectTitle: "",
-    projectDescription: "",
-    projectCategories: "",
-    projectGoal: "",
-    projectImage: "",
-    projectIsOpen: "",
-    projectDate: "",
+    title: "",
+    description: "",
+    categories: "",
+    goal: "",
+    image: "",
+    is_open: "",
+    date_created: new Date(),
   });
 
   const handleChange = (event) => {
@@ -46,7 +49,7 @@ const CreateProjectForm = (props) => {
         Authorization: `Token ${token}`,
         "Content-Type": "application/json",
       },
-      
+
       body: JSON.stringify({
         title: projectInfo.title,
         date_created: new Date(),
@@ -55,11 +58,11 @@ const CreateProjectForm = (props) => {
         is_open: projectInfo.is_open,
         image: projectInfo.image,
       }),
-      
     });
     //displayNewProject();
-     
-  
+    
+    console.log(projectInfo);
+    history.push("/");
     return response.json();
     
   };
@@ -68,10 +71,10 @@ const CreateProjectForm = (props) => {
     e.preventDefault();
     postData().then((response) => {
       console.log("response from our API --------", response);
-      
+      //console.log("project_id --------", project_id);
     });
-    
   };
+  
   return (
     <Fragment>
       <Grid
