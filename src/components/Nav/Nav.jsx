@@ -45,7 +45,7 @@ function Nav() {
               Home
             </Button>
           </Grid>
-          {!isLoggedIn && (
+        
           <Grid container>
             <Grid item xs={6}>
               <Button to="/login" color="inherit" component={NavLink}>
@@ -59,8 +59,8 @@ function Nav() {
               </Button>
             </Grid>
           </Grid>
-          )}
-          {isLoggedIn && (
+         
+        
             <Grid container>
               <Grid item xs={6}>
                 <Button color="inherit" component={NavLink} to="/createproject">
@@ -84,7 +84,7 @@ function Nav() {
               </IconButton>
               </Grid> */}
             </Grid>
-          )}
+      
         </Toolbar>
       </AppBar>
     </Grid>
