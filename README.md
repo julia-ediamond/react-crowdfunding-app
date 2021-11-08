@@ -1,15 +1,15 @@
 # Code for good 
 
-This is a crowdfunding app named Code for good. It was built for learning purposes at She Codes Plus. This is a fullstack application built with React and React Material-Ui on the frontend. It fetches data from REST API built with Django Rest Framework which is also deployed on Heroku [See it here](https://quiet-hamlet-41512.herokuapp.com/projects/).
+This is a crowdfunding app named Code for good. It was built for learning purposes at She Codes Plus. This is a fullstack application built with React and React Material-UI on the frontend. It fetches data from REST API built with Django Rest Framework which is deployed on Heroku [See it here](https://quiet-hamlet-41512.herokuapp.com/projects/).
 
 ## Features
 
-The application Code for good is still being built. The current features are: 
-1. Homepage displays all projects
+The application Code for good is being built. The current features are: 
+1. Homepage displays all crowdfunding projects
 
 ![Homepage](/homep.png)
 
-2. Users can signup/login. Authentication is handled with a token
+2. Users can signup/login/logout. Authentication is handled with a token
 
 ![Login form](/login.png)
 
@@ -23,11 +23,12 @@ The application Code for good is still being built. The current features are:
 
 ### Features to be implemented next: 
 1. Hide edit and delete buttons to those users who don't own projects. 
-2. Hide login, signup and logout depending of auth. 
-3. Alter pledge posting
-4. Alter project posting
-5. Edit pledge
-6. Edit/delete user profile.
+2.  Alter pledge posting
+3. Alter project posting
+4. Edit pledge
+5. Edit/delete user profile.
+
+There is a bug in displaying nav. It will be fixed asap.
 
 ### Deployed
 
