@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { useHistory } from "react-router-dom";
-import { Grid, Button, Input, InputLabel } from "@material-ui/core";
+import { Grid, Button, Input, InputLabel, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   form: {
-    marginTop: theme.spacing(5),
+    padding: theme.spacing(5),
   },
 }));
 
@@ -58,7 +58,8 @@ function LoginForm() {
   };
   return (
     <Fragment>
-      <Grid container justifyContent="center" spacing={3}>
+      <Grid container justifyContent="center">
+        <Paper> 
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid className={classes.formGroup} item xs={12}>
             <InputLabel className={classes.formLabel} htmlFor="username">
@@ -91,6 +92,7 @@ function LoginForm() {
             </Button>
           </Grid>
         </form>
+        </Paper>
       </Grid>
     </Fragment>
   );

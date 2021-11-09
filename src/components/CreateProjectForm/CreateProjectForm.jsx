@@ -1,16 +1,26 @@
 import { React, Fragment, useState } from "react";
-import { Grid, Button, Input, InputLabel, Typography } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  Input,
+  InputLabel,
+  Paper,
+  TextareaAutosize,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { useHistory, useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
-    padding: theme.spacing(4),
+    
     width: "100%",
   },
   formGroup: {
     padding: theme.spacing(2),
+  },
+  form: {
+    padding: theme.spacing(6),
   },
 }));
 
@@ -83,6 +93,7 @@ const CreateProjectForm = (props) => {
         justifyContent="center"
         spacing={3}
       >
+        <Paper> 
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid className={classes.formGroup} item xs={12}>
             <InputLabel className={classes.formLabel} htmlFor="username">
@@ -145,7 +156,7 @@ const CreateProjectForm = (props) => {
 
           <Grid className={classes.formGroup} item xs={12}>
             <InputLabel className={classes.formLabel} htmlFor="password">
-              Is open:
+              Open:
             </InputLabel>
             <Input
               className={classes.formInput}
@@ -173,6 +184,7 @@ const CreateProjectForm = (props) => {
             </Button>
           </Grid>
         </form>
+        </Paper> 
       </Grid>
     </Fragment>
   );

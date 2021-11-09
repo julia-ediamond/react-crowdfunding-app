@@ -1,5 +1,5 @@
 import { React, Fragment, useState } from "react";
-import { Grid, Button, Input, InputLabel } from "@material-ui/core";
+import { Grid, Button, Input, InputLabel, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   form: {
-    marginTop: theme.spacing(5),
+    padding: theme.spacing(5),
   },
 }));
 
@@ -61,7 +61,8 @@ function SignupForm () {
 
 return (
     <Fragment>
-      <Grid container justifyContent="center" spacing={3}>
+      <Grid container justifyContent="center">
+        <Paper>
         <form className={classes.form} noValidate>
           <Grid className={classes.formGroup} item xs={12}>
             <InputLabel className={classes.formLabel} htmlFor="username">
@@ -109,6 +110,7 @@ return (
             </Button>
           </Grid>
         </form>
+        </Paper>
       </Grid>
     </Fragment>
   );

@@ -6,7 +6,8 @@ import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%"
+    width: "100%",
+    backgroundColor: theme.palette.primary.light,
   },
   title: {
     color: "black",
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   topIcon: {
     marginTop: theme.spacing(2),
-  }
+  },
 }));
 
 const CreateProject = () => {

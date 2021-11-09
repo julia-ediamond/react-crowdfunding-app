@@ -5,14 +5,16 @@ import { Grid, Paper, Typography } from "@material-ui/core";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    backgroundColor: theme.palette.primary.light,
+  },
   title: {
     color: "black",
     margin: theme.spacing(3),
   },
   topIcon: {
     marginTop: theme.spacing(2),
-  }
+  },
 }));
 
 function HomePage() {

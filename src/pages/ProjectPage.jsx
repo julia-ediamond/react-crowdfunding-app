@@ -1,17 +1,24 @@
 import { React, Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { Grid, Paper, Typography, ListItem, Button } from "@material-ui/core";
+import { 
+  Grid, 
+  Paper, 
+  Typography, 
+  ListItem, 
+  Button, 
+ } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Pledge from "../components/Pledge/Pledge";
 import EditProject from "../components/EditProject/EditProject";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
-import CreateProjectForm from "../components/CreateProjectForm/CreateProjectForm";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
     width: "100%",
+    backgroundColor: theme.palette.primary.light,
   },
   title: {
     color: "black",
