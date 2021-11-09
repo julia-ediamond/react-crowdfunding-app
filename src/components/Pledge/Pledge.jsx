@@ -83,6 +83,7 @@ const Pledge = (props) => {
               className={classes.formInput}
               type="text"
               id="amount"
+              placholder="AUD"
               onChange={handleChange}
             />
           </Grid>
