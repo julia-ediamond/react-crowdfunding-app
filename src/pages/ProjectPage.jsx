@@ -1,23 +1,18 @@
 import { React, Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { 
-  Grid, 
-  Paper, 
-  Typography, 
-  ListItem, 
-  Button, 
- } from "@material-ui/core";
+import { Grid, Paper, Typography, ListItem, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Pledge from "../components/Pledge/Pledge";
 import EditProject from "../components/EditProject/EditProject";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
-
+import { ColorizeOutlined, ViewColumnTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
     width: "100%",
+    height: "100%",
     backgroundColor: theme.palette.primary.light,
   },
   title: {
@@ -28,12 +23,32 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   projectCard: {
-    width: "45",
     padding: theme.spacing(2),
   },
   projectImage: {
     padding: theme.spacing(3),
   },
+  pledges: {
+    padding: theme.spacing(4),
+  },
+  pledgesContainer: {
+    padding: theme.spacing(1),
+    width: "50%",
+  },
+  makePledge: {
+    padding: theme.spacing(1),
+    
+  },
+  ProjectColumns: {
+    width: "100%",
+    padding: theme.spacing(3),
+  },
+  pledgePaper: {
+    backgroundColor: theme.palette.primary.main,
+  },
+  delete: {
+    padding: theme.spacing(3),
+  }
 }));
 
 function ProjectPage() {
@@ -98,82 +113,104 @@ function ProjectPage() {
             Code for good
           </Typography>
         </Grid>
-        <Grid container direction="column" alignItems="center">
-          <Paper>
-            <Grid item className={classes.projectCard}>
-              <Grid container justifyContent="center">
-                <img
-                  className={classes.projectImage}
-                  alt="projectData"
-                  src={projectData.image}
-                />
-              </Grid>
-              <Grid container justifyContent="center">
-                <Typography variant="h5">{projectData.title}</Typography>
-              </Grid>
-              <Grid container>
-                <Typography variant="h5">{projectData.description}</Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="h5">
-                  Created at: {formattedDate}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="h5">Goal: $ {projectData.goal}</Typography>
-              </Grid>
-              <Grid container>
-                <Typography variant="h5">{`Status:${projectData.is_open}`}</Typography>
-              </Grid>
 
-              <Grid container>
-                <Typography variant="h5">Pledges:</Typography>
-
-                {/* key - index of data, while pledge data is actual data*/}
-                {projectData.pledges.map((pledgeData, key) => {
-                  return (
-                    <ListItem>
-                      ${pledgeData.amount} with comment: {pledgeData.comment}
-                    </ListItem>
-                  );
-                })}
-              </Grid>
-
-              <Grid container>
-                <Typography variant="h5">
-                  Pledges total: ${projectData.total}
-                </Typography>
-              </Grid>
-              {localStorage.getItem("token") && isEditing === false && (
+        <Grid container spacing={3} justifyContent="center"  className={classes.ProjectColumns}>
+          <Grid item xs>
+            <Paper>
+              <Grid item className={classes.projectCard}>
                 <Grid container justifyContent="center">
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={() => setIsEditing(true)}
-                  >
-                    Edit project
-                  </Button>
+                  <img
+                    className={classes.projectImage}
+                    alt="projectData"
+                    src={projectData.image}
+                  />
                 </Grid>
-              )}
+                <Grid container justifyContent="center">
+                  <Typography variant="h5">{projectData.title}</Typography>
+                </Grid>
+                <Grid container>
+                  <Typography variant="h5">
+                    {projectData.description}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h5">
+                    Created at: {formattedDate}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h5">
+                    Goal: $ {projectData.goal}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography variant="h5">{`Status:${projectData.is_open}`}</Typography>
+                </Grid>
 
-              {isEditing && (
-                <EditProject displayEditedProject={getProjectData} />
-              )}
-
-              <Grid container>
-                <Pledge refreshProjectData={getProjectData} />
-              </Grid>
-
-              <Grid container justifyContent="center">
-                {localStorage.getItem("token") && (
-                  <Button variant="outlined" onClick={deleteProject}>
-                    {" "}
-                    Delete project
-                  </Button>
+                {localStorage.getItem("token") && isEditing === false && (
+                  <Grid container justifyContent="center">
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => setIsEditing(true)}
+                    >
+                      Edit project
+                    </Button>
+                  </Grid>
                 )}
+
+                {isEditing && (
+                  <EditProject displayEditedProject={getProjectData} />
+                )}
+
+                <Grid className={classes.delete} container justifyContent="center">
+                  {localStorage.getItem("token") && (
+                    <Button variant="outlined" onClick={deleteProject}>
+                      {" "}
+                      Delete project
+                    </Button>
+                  )}
+                </Grid>
               </Grid>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={4} spacing={3} justifyContent="center" className={classes.pledgesContainer}>
+            <Grid>
+              <Paper>
+                <Grid container className={classes.pledges}>
+                  <Grid container textAlign="center">
+                    <Typography variant="h4">Pledges:</Typography>
+                  </Grid>
+
+                  {/* key - index of data, while pledge data is actual data*/}
+                  {projectData.pledges.map((pledgeData, key) => {
+                    return (
+                      <ListItem>
+                        ${pledgeData.amount} with comment: {pledgeData.comment}
+                      </ListItem>
+                    );
+                  })}
+
+                  <Grid container>
+                    <Typography variant="h5">
+                      Total pledges received: ${projectData.total}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Paper>
             </Grid>
-          </Paper>
+
+            <Grid item xs className={classes.makePledge}>
+              <Paper className={classes.pledgePaper}>
+                <Grid>
+                  <Pledge refreshProjectData={getProjectData} />
+                </Grid>
+              </Paper>
+            </Grid>
+          </Grid>
+
+
         </Grid>
       </Grid>
     </Fragment>

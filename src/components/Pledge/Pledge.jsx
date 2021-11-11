@@ -12,6 +12,19 @@ const useStyles = makeStyles((theme) => ({
   formGroup: {
     padding: theme.spacing(2),
   },
+  customizedHeading: {
+    color: theme.palette.secondary.dark,
+  },
+  customizedButton: {
+    backgroundColor: theme.palette.secondary.light,
+  },
+  formInput: {
+    backgroundColor: theme.palette.secondary.light,
+    width: "100%",
+  },
+  formLabel: {
+    color: theme.palette.secondary.dark,
+  }
 }));
 
 const Pledge = (props) => {
@@ -69,38 +82,51 @@ const Pledge = (props) => {
         spacing={3}
       >
         <Grid container justifyContent="center">
-          <Typography variant="h4">
-            Make your pledge for project
+          <Typography variant="h4" className={classes.customizedHeading}>
+            Make your pledge
           </Typography>
         </Grid>
 
         <form className={classes.form} noValidate>
           <Grid className={classes.formGroup} item xs={12}>
-            <InputLabel className={classes.formLabel} htmlFor="username">
+            {/* <InputLabel className={classes.formLabel} htmlFor="username">
               Amount:
-            </InputLabel>
+            </InputLabel> */}
             <Input
               className={classes.formInput}
               type="text"
               id="amount"
-              placholder="AUD"
+              placeholder="amount"
               onChange={handleChange}
             />
           </Grid>
           <Grid className={classes.formGroup} item xs={12}>
-            <InputLabel className={classes.formLabel} htmlFor="username">
+            {/* <InputLabel className={classes.formLabel} htmlFor="username">
               Comment:
-            </InputLabel>
+            </InputLabel> */}
             <Input
               className={classes.formInput}
               type="text"
               id="comment"
+              placeholder="comment"
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid className={classes.formGroup} item xs={12}>
+            {/* <InputLabel className={classes.formLabel} htmlFor="username">
+              Do you wish to stay anonymous:
+            </InputLabel> */}
+            <Input
+              className={classes.formInput}
+              type="text"
+              id="anonymous"
+              placeholder="anonymously?"
               onChange={handleChange}
             />
           </Grid>
           <Grid container justifyContent="center">
             <Button
-              color="primary"
+              className={classes.customizedButton}
               onClick={handleSubmit}
               variant="contained"
               type="submit"
