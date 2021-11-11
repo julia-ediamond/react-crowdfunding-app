@@ -21,6 +21,8 @@ The application Code for good is being built. The current features are:
 
 ![Edit project](/edit.png)
 
+5. ![Project page](/projectpage.png)
+
 ### Features to be implemented next: 
 1. Hide edit and delete buttons to those users who don't own projects. 
 2.  Alter pledge posting
