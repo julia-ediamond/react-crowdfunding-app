@@ -33,7 +33,7 @@ function LoginForm() {
     console.log(credentials);
   };
 
-  const postData = async () => {
+  const postData = async (props) => {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}api-token-auth/`,
       {
