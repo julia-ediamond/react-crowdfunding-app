@@ -11,7 +11,7 @@ The application Code for good is being built. The current features are:
 
 2. Users can signup/login/logout. Authentication is handled with a token
 
-![Login form](/login.png)
+![Login form](/signup.png)
 
 3. Users can see individual project details, pledge for chosen projects, see totals of pledges and comments of supporters. 
 
