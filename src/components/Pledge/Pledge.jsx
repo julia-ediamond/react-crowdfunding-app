@@ -12,12 +12,6 @@ const useStyles = makeStyles((theme) => ({
   formGroup: {
     padding: theme.spacing(2),
   },
-  customizedHeading: {
-    color: theme.palette.secondary.dark,
-  },
-  customizedButton: {
-    backgroundColor: theme.palette.secondary.light,
-  },
   formInput: {
     backgroundColor: theme.palette.secondary.light,
     width: "100%",
@@ -82,7 +76,7 @@ const Pledge = (props) => {
         spacing={3}
       >
         <Grid container justifyContent="center">
-          <Typography variant="h4" className={classes.customizedHeading}>
+          <Typography variant="h4">
             Make your pledge
           </Typography>
         </Grid>
@@ -126,7 +120,7 @@ const Pledge = (props) => {
           </Grid>
           <Grid container justifyContent="center">
             <Button
-              className={classes.customizedButton}
+              color="primary"
               onClick={handleSubmit}
               variant="contained"
               type="submit"
