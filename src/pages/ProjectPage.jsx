@@ -43,9 +43,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     padding: theme.spacing(3),
   },
-  pledgePaper: {
-    backgroundColor: theme.palette.primary.main,
-  },
   delete: {
     padding: theme.spacing(3),
   }

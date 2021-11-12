@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, IconButton, Button } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -26,17 +26,39 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Nav() {
-  
   const token = window.localStorage.getItem("token");
   const classes = useStyles();
   const history = useHistory();
-  const [isLoggedIn, setIsLoggedIn] = useState(token);
+  //!! turns token into boolean
+  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
 
-    const logout = () => {
-      localStorage.clear();
-      setIsLoggedIn(null);
-      history.push("/");
+  const logout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    history.push("/");
+  };
+  console.log("token", token);
+  //listen to local storage changes
+  useEffect(() => {
+    function checkForToken() {
+      const token = localStorage.getItem("token");
+      // if (token) {
+      //
+      // }
+      setIsLoggedIn(!!token);
+      console.log("token", token);
+    }
+    //add an event listener that runs on storage events
+    window.addEventListener("storage", checkForToken);
+    console.log("token", token);
+    //the effect hook returns a cleanup function that runs
+    //when the component is unmounted, to remove our event listener
+
+    return () => {
+      window.removeEventListener("storage", checkForToken);
+      console.log("token", token);
     };
+  }, []);
 
   return (
     <Grid className={classes.root}>
@@ -47,24 +69,8 @@ function Nav() {
               Home
             </Button>
           </Grid>
-          {!isLoggedIn && 
-          <Grid container>
-          
-            <Grid item xs={6}>
-              <Button to="/login" color="inherit" component={NavLink}>
-                Login
-              </Button>
-            </Grid>
-          
-            <Grid item xs={6}>
-              <Button to="/signup" color="inherit" component={NavLink}>
-                Sign up
-              </Button>
-            </Grid>
-          </Grid>
-        }
-        
-        {isLoggedIn && 
+
+          {isLoggedIn ? (
             <Grid container>
               <Grid item xs={6}>
                 <Button color="inherit" component={NavLink} to="/createproject">
@@ -76,8 +82,24 @@ function Nav() {
                   Logout
                 </Button>
               </Grid>
-            
-              {/* <Grid container justifyContent="flex-end">
+            </Grid>
+          ) : (
+            <Grid container>
+              <Grid item xs={6}>
+                <Button to="/login" color="inherit" component={NavLink}>
+                  Login
+                </Button>
+              </Grid>
+
+              <Grid item xs={6}>
+                <Button to="/signup" color="inherit" component={NavLink}>
+                  Sign up
+                </Button>
+              </Grid>
+            </Grid>
+          )}
+
+          {/* <Grid container justifyContent="flex-end">
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -88,8 +110,6 @@ function Nav() {
                 <AccountCircle />
               </IconButton>
               </Grid> */}
-            </Grid>
-      }
         </Toolbar>
       </AppBar>
     </Grid>
@@ -114,7 +134,7 @@ export default Nav;
 //   }
 //   // add an event listener that runs on 'storage' events
 //   window.addEventListener('storage', checkUserData)
-//   // the effect hook returns a cleanup function that runs 
+//   // the effect hook returns a cleanup function that runs
 //   // when the component is unmounted, to remove our event listener
 //   return () => {
 //     window.removeEventListener('storage', checkUserData)
