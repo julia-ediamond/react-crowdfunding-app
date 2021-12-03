@@ -172,7 +172,7 @@ const CreateProjectForm = (props) => {
             </InputLabel>
             <Input
               className={classes.formInput}
-              type="date"
+             type="date" 
               id="date_created"
               onChange={handleChange}
             />
