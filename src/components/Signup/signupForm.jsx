@@ -1,6 +1,7 @@
 import { React, Fragment, useState } from "react";
 import { Grid, Button, Input, InputLabel, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SignupForm () {
     const classes = useStyles();
+    const history = useHistory();
     const initialValues = {
       username: "",
       email: "",
@@ -56,6 +58,7 @@ function SignupForm () {
       e.preventDefault();
         postData().then((response) => {
           console.log("Response from API---------", response)
+          history.push("/login")
         });
     };
 
