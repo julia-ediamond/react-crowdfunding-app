@@ -17,11 +17,11 @@ The application Code for good is being built. The current features are:
 
 ![Pledges](/pledges.png)
 
-4. Authorised users can edit and delete their projects. 
+4. Project page allows users to create, edit and delete project. All operations work fine. Edit and delete UX is to be improved. 
 
 ![Edit project](/edit.png)
 
-5. ![Project page](/projectpage.png)
+![Project page](/projectpage.png)
 
 ## Cepress tests
 The app is covered by e2e tests with Cypress. 
