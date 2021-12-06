@@ -23,6 +23,11 @@ The application Code for good is being built. The current features are:
 
 5. ![Project page](/projectpage.png)
 
+## Cepress tests
+The app is covered by e2e tests with Cypress. 
+
+![Tests](/cypress_tests.png)
+
 ### Features to be implemented next: 
 1. Hide edit and delete buttons to those users who don't own projects. 
 2.  Alter pledge posting
@@ -30,7 +35,7 @@ The application Code for good is being built. The current features are:
 4. Edit pledge
 5. Edit/delete user profile.
 
-There is a bug in displaying nav. It will be fixed asap.
+There is a bug in displaying nav. Once a users logges in - the nav doesn't refresh automatically still showing login/sighup flow. IUt refreshes fine when a user logs out though. It will be fixed asap.
 
 ### Deployed
 
