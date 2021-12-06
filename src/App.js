@@ -1,7 +1,7 @@
 import React from "react";
 import HomePage from "./pages/HomePage.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useParams } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
 import { makeStyles } from "@material-ui/styles";
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  
   return (
     <ThemeProvider theme={theme}>
       <div className="root">

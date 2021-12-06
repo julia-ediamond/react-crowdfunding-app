@@ -69,6 +69,7 @@ function LoginForm() {
               className={classes.formInput}
               type="text"
               id="username"
+              name="username"
               placeholder="Enter username"
               onChange={handleChange}
             />
@@ -82,6 +83,7 @@ function LoginForm() {
               className={classes.formInput}
               type="password"
               id="password"
+              name="password"
               placeholder="Password"
               onChange={handleChange}
             />

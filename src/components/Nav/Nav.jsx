@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/styles";
 import { Grid, Button } from "@material-ui/core";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
@@ -61,37 +60,37 @@ function Nav() {
   }, []);
 
   return (
-    <Grid className={classes.root}>
+    <Grid className={classes.root} justifyContent="center">
       <AppBar position="static">
         <Toolbar className={classes.menuApp}>
-          <Grid item xs={6} className={classes.menuItem}>
+          <Grid container item xs={6} className={classes.menuItem} justifyContent="center">
             <Button color="inherit" component={NavLink} to="/">
               Home
             </Button>
           </Grid>
 
           {isLoggedIn ? (
-            <Grid container>
-              <Grid item xs={6}>
-                <Button color="inherit" component={NavLink} to="/createproject">
+            <Grid container justifyContent="center">
+              <Grid container item xs={6} justifyContent="center">
+                <Button color="inherit" component={NavLink} to="/createproject" >
                   Create project
                 </Button>
               </Grid>
-              <Grid item xs={6}>
+              <Grid container item xs={6} justifyContent="center">
                 <Button color="inherit" onClick={() => logout()}>
                   Logout
                 </Button>
               </Grid>
             </Grid>
           ) : (
-            <Grid container>
-              <Grid item xs={6}>
+            <Grid container justifyContent="center">
+              <Grid container item xs={6} justifyContent="center">
                 <Button to="/login" color="inherit" component={NavLink}>
                   Login
                 </Button>
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid container item xs={6} justifyContent="center">
                 <Button to="/signup" color="inherit" component={NavLink}>
                   Sign up
                 </Button>
